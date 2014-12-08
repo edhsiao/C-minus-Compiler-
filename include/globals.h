@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdbool.h>
 
 #ifndef FALSE
 #define FALSE 0
@@ -36,8 +37,14 @@ typedef enum {Factor, Const, Additive, Simple, Id, Term, Op} ExpKind;
 typedef enum {Var, Fun, Param, Type} DeclKind;
 typedef enum {Params, Local, StmtList, AdditiveList, TermList, Args} ListKind;
 
+
+typedef union{
+	 int val_int;
+	 float val_float;
+}ValType;
+
 /* ExpType is used for type checking */
-typedef enum {Dummy, Ummyd, Void,Integer,Array} ExpType;
+typedef enum {Dummy, Ummyd, Void,Integer,Float,Array} ExpType;
 
 #define MAXCHILDREN 3
 
@@ -48,7 +55,12 @@ typedef struct treeNode
      int col;
      char *expected;
      int op;
-     int val;
+     bool constIsInt;
+
+     ValType val;
+
+     //int val;
+
      char *name;
      char *type;
      NodeKind nodekind;

@@ -69,8 +69,8 @@ TreeNode * parse(void) {
 
 %}
 
-%token ELSE IF INT RETURN VOID WHILE
-%token ID NUM 
+%token ELSE IF INT FLOAT RETURN VOID WHILE
+%token ID NUM NUM_FLOAT
 %token PLUS MINUS TIMES OVER LT LTEQ GT GTEQ EQ NEQ ASSIGN SEMICOLON COMMA LPAREN RPAREN LBRACKET RBRACKET LBRACE RBRACE
 %token ERROR 
 
@@ -125,19 +125,24 @@ var_declaration	: type_specifier ID SEMICOLON
 			  $$.node->type= copyString("Array");
 			  $$.node->name = $3.str;
 			  $$.node->lineno = savedLineNo;
-			  $$.node->val = atoi(tokenString); /* $5.op; */
+			  $$.node->val.val_int = atoi(tokenString); /* $5.op; */
 			  if(lookup(h, $3.str) != NULL) printf("%s is previously declared\n", $3.str);
 			  else insert(h, $3.str, "Array", savedLineNo, 0, atoi(tokenString));
 			}
 		;
 
-type_specifier	: INT
+type_specifier	: 
+		INT
 			{
 			  $$.str = copyString("Integer");
 			}
 		| VOID
 			{
 			  $$.str = copyString("Void");
+			}
+		| FLOAT
+			{
+			  $$.str = copyString("Float");
 			}
 		;
 
@@ -449,7 +454,14 @@ factor	: LPAREN expr RPAREN
 	| NUM
 		{ 
 		  $$.node = newExpNode(Const);
-		  $$.node->val = atoi(next_token);
+		  $$.node->val.val_int = atoi(next_token);
+		  $$.node->constIsInt = true;
+		}
+	| NUM_FLOAT
+		{ 
+		  $$.node = newExpNode(Const);
+		  $$.node->val.val_float = atof(next_token);
+		  $$.node->constIsInt = false;
 		}
 	;
 

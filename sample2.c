@@ -2,14 +2,21 @@ int x;
 int y;
 int k;
 
-void abc (int qwe,float lol)
+int abc (int qwe,float lol)
 {
-	int aa,bb,cc = -2;
-	float ee[123], qre = 1.23;
-	if( aa==cc)
+	int aa;
+	int bb;
+	int cc;
+	int dd;
+	float ee[123];
+	float qre;
+
+	cc = -2;
+	qre = 1.23;
+
+	if( aa == bb )
 	{
-		while (cc<bb)
-			bb!=dd;
+		aa = 5;
 	}
 	else
 		return 1;

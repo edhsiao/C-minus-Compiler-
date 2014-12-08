@@ -27,58 +27,59 @@ FILE * code;
 int TraceScan = TRUE;
 int TraceParse = TRUE; 
 int TraceAnalyze = TRUE;
-int TraceCode = FALSE;
+int TraceCode = TRUE;
 
 int main( int argc, char * argv[] )
-{ TreeNode * syntaxTree;
-  char pgm[120]; /* source code file name */
-  hash_new(&h);
-  if (argc < 2)
-    { fprintf(stderr,"usage: %s <filename>\n",argv[0]);
-      exit(1);
-    }
-  if (argc == 3)
-  {
-    if(strcmp(argv[2], "-a") == 0)
-    {
-      TraceScan = FALSE;
-      TraceAnalyze = FALSE;	
-    }
-    else if(strcmp(argv[2], "-s") == 0)
-    {
-      TraceScan = FALSE;
-      TraceParse = FALSE;
-    }
-  }
-  strcpy(pgm,argv[1]) ;
-  if (strchr (pgm, '.') == NULL)
-     strcat(pgm,".cm");
-  source = fopen(pgm,"r");
-  if (source==NULL)
-  { fprintf(stderr,"File %s not found\n",pgm);
-    exit(1);
-  }
-  listing = stdout; /* send listing to screen */
-  fprintf(listing,"\nC Minus compilation: %s\n",pgm);
+{
+	TreeNode * syntaxTree;
+	char pgm[120]; /* source code file name */
+	hash_new(&h);
+	if (argc < 2)
+	{ fprintf(stderr,"usage: %s <filename>\n",argv[0]);
+	exit(1);
+	}
+	if (argc == 3)
+	{
+		if(strcmp(argv[2], "-a") == 0)
+		{
+			TraceScan = FALSE;
+			TraceAnalyze = FALSE;
+		}
+		else if(strcmp(argv[2], "-s") == 0)
+		{
+			TraceScan = FALSE;
+			TraceParse = FALSE;
+		}
+	}
+	strcpy(pgm,argv[1]) ;
+	if (strchr (pgm, '.') == NULL)
+		strcat(pgm,".cm");
+	source = fopen(pgm,"r");
+	if (source==NULL)
+	{ fprintf(stderr,"File %s not found\n",pgm);
+	exit(1);
+	}
+	listing = stdout; /* send listing to screen */
+	fprintf(listing,"\nC Minus compilation: %s\n",pgm);
 #if NO_PARSE
-  //if(a_flag == 0)
-  while( (ttype=getToken())!= 0 )
-    printToken( ttype, tokenString );
+	//if(a_flag == 0)
+	while( (ttype=getToken())!= 0 )
+		printToken( ttype, tokenString );
 #else
-  syntaxTree = parse();
-  if (TraceParse) {
-    fprintf(listing,"\nSyntax tree:\n");
-    printTree(syntaxTree);
-  }
+	syntaxTree = parse();
+	if (TraceParse) {
+		fprintf(listing,"\nSyntax tree:\n");
+		printTree(syntaxTree);
+	}
 
-  if(TraceAnalyze) {
-    fprintf(listing, "\nSymbol Table:\n");
-    print_hash(h);
-  }
-  list_kill(l);
-  hash_kill(&h);
+	if(TraceAnalyze) {
+		fprintf(listing, "\nSymbol Table:\n");
+		print_hash(h);
+	}
+	list_kill(l);
+	hash_kill(&h);
 #endif
-  fclose(source);
-  return 0;
+	fclose(source);
+	return 0;
 }
 

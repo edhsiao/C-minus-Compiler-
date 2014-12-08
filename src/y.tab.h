@@ -48,62 +48,66 @@ extern int yydebug;
     ELSE = 258,
     IF = 259,
     INT = 260,
-    RETURN = 261,
-    VOID = 262,
-    WHILE = 263,
-    ID = 264,
-    NUM = 265,
-    PLUS = 266,
-    MINUS = 267,
-    TIMES = 268,
-    OVER = 269,
-    LT = 270,
-    LTEQ = 271,
-    GT = 272,
-    GTEQ = 273,
-    EQ = 274,
-    NEQ = 275,
-    ASSIGN = 276,
-    SEMICOLON = 277,
-    COMMA = 278,
-    LPAREN = 279,
-    RPAREN = 280,
-    LBRACKET = 281,
-    RBRACKET = 282,
-    LBRACE = 283,
-    RBRACE = 284,
-    ERROR = 285
+    FLOAT = 261,
+    RETURN = 262,
+    VOID = 263,
+    WHILE = 264,
+    ID = 265,
+    NUM = 266,
+    NUM_FLOAT = 267,
+    PLUS = 268,
+    MINUS = 269,
+    TIMES = 270,
+    OVER = 271,
+    LT = 272,
+    LTEQ = 273,
+    GT = 274,
+    GTEQ = 275,
+    EQ = 276,
+    NEQ = 277,
+    ASSIGN = 278,
+    SEMICOLON = 279,
+    COMMA = 280,
+    LPAREN = 281,
+    RPAREN = 282,
+    LBRACKET = 283,
+    RBRACKET = 284,
+    LBRACE = 285,
+    RBRACE = 286,
+    ERROR = 287
   };
 #endif
 /* Tokens.  */
 #define ELSE 258
 #define IF 259
 #define INT 260
-#define RETURN 261
-#define VOID 262
-#define WHILE 263
-#define ID 264
-#define NUM 265
-#define PLUS 266
-#define MINUS 267
-#define TIMES 268
-#define OVER 269
-#define LT 270
-#define LTEQ 271
-#define GT 272
-#define GTEQ 273
-#define EQ 274
-#define NEQ 275
-#define ASSIGN 276
-#define SEMICOLON 277
-#define COMMA 278
-#define LPAREN 279
-#define RPAREN 280
-#define LBRACKET 281
-#define RBRACKET 282
-#define LBRACE 283
-#define RBRACE 284
-#define ERROR 285
+#define FLOAT 261
+#define RETURN 262
+#define VOID 263
+#define WHILE 264
+#define ID 265
+#define NUM 266
+#define NUM_FLOAT 267
+#define PLUS 268
+#define MINUS 269
+#define TIMES 270
+#define OVER 271
+#define LT 272
+#define LTEQ 273
+#define GT 274
+#define GTEQ 275
+#define EQ 276
+#define NEQ 277
+#define ASSIGN 278
+#define SEMICOLON 279
+#define COMMA 280
+#define LPAREN 281
+#define RPAREN 282
+#define LBRACKET 283
+#define RBRACKET 284
+#define LBRACE 285
+#define RBRACE 286
+#define ERROR 287
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

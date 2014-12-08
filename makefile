@@ -4,7 +4,6 @@ all:
 	tc
 
 tc: 
-	src/ include/
 	cd src; make
 
 clean:
