@@ -1,8 +1,10 @@
 default: all
 
-all: tc
+all: 
+	tc
 
-tc: src/ include/
+tc: 
+	src/ include/
 	cd src; make
 
 clean:
