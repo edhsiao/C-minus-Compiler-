@@ -1,10 +1,13 @@
 /****************************************************/
-/* File: main.c */
-/* Main program for TINY compiler */
+/* File: main.c                                     */
+/* Main program for TINY compiler                   */
 /****************************************************/
+
 #include "globals.h"
-/* set NO_PARSE to TRUE to get a scanner-only compiler */
+
+
 #define NO_PARSE FALSE
+
 #include "util.h"
 #include "list.h"
 //#if NO_PARSE
@@ -12,24 +15,27 @@
 //#else
 #include "parse.h"
 //#endif
-/* allocate global variables */
+
+
 int lineno = 0;
 int col = 0;
 FILE * source;
 FILE * listing;
 FILE * code;
-/* allocate and set tracing flags */
+
+
 int TraceScan = TRUE;
 int TraceParse = TRUE;
 int TraceAnalyze = TRUE;
 int TraceCode = TRUE;
+
 int main( int argc, char * argv[] )
 {
 	TreeNode * syntaxTree;
-	char pgm[120]; /* source code file name */
+	char prog[120];
 	hash_new(&h);
 	if (argc < 2)
-	{ fprintf(stderr,"usage: %s <filename>\n",argv[0]);
+	{ fprintf(stderr,"Uso: %s <nomeArquivo>\n",argv[0]);
 	exit(1);
 	}
 	if (argc == 3)
@@ -45,16 +51,16 @@ int main( int argc, char * argv[] )
 			TraceParse = FALSE;
 		}
 	}
-	strcpy(pgm,argv[1]) ;
-	if (strchr (pgm, '.') == NULL)
-		strcat(pgm,".cm");
-	source = fopen(pgm,"r");
+	strcpy(prog,argv[1]) ;
+	if (strchr (prog, '.') == NULL)
+		strcat(prog,".cm");
+	source = fopen(prog,"r");
 	if (source==NULL)
-	{ fprintf(stderr,"File %s not found\n",pgm);
+	{ fprintf(stderr,"Arquivo %s nao encontrado\n",prog);
 	exit(1);
 	}
-	listing = stdout; /* send listing to screen */
-	fprintf(listing,"\nC Minus compilation: %s\n",pgm);
+	listing = stdout;
+	fprintf(listing,"\nArquivo C Menos: %s\n",prog);
 #if NO_PARSE
 	//if(a_flag == 0)
 	while( (ttype=getToken())!= 0 )
@@ -62,11 +68,12 @@ int main( int argc, char * argv[] )
 #else
 	syntaxTree = parse();
 	if (TraceParse) {
-		fprintf(listing,"\nSyntax tree:\n");
+		fprintf(listing,"\nArvore Sintatica:\n");
 		printTree(syntaxTree);
 	}
+
 	if(TraceAnalyze) {
-		fprintf(listing, "\nSymbol Table:\n");
+		fprintf(listing, "\nTabela de simbolo:\n");
 		print_hash(h);
 	}
 	list_kill(l);
