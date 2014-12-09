@@ -15,6 +15,7 @@
 #define YYSTYPE type_t
 static int savedLineNo;
 static int saved_col;
+static int intTemp;
 static TreeNode * savedTree; /*armazena a arvore de sintaxe para uso futura*/
 
 typedef union type_t type_t;
@@ -111,23 +112,30 @@ var_declaration	: type_specifier ID PV
 			  $$.node = newDeclNode(Var);
 			  $$.node->type = $1.str;
 			  $$.node->name = copyString(tokenString);
-			  if(lookup(h, tokenString) != NULL) printf("%s ja foi declarado\n", tokenString);
-			  else insert(h, tokenString, $1.str, lineno, 0, 0);
+			  
+			  if(lookup(h, tokenString) != NULL)
+			     printf("%s ja foi declarado\n", tokenString);
+			  else 
+			     insert(h, tokenString, $1.str, lineno, 0, 0);
 			}
 		| type_specifier ID
 			{
 			  savedLineNo = lineno; 
 			  $$.str = copyString(tokenString);
 			}
-		ACOL NUM FCOL PV
+		ACOL NUM FCOL {intTemp = atoi(tokenString); } PV
 			{
 			  $$.node = newDeclNode(Var);
 			  $$.node->type= copyString("Array");
 			  $$.node->name = $3.str;
 			  $$.node->lineno = savedLineNo;
-			  $$.node->val.val_int = atoi(tokenString); /* $5.op; */
-			  if(lookup(h, $3.str) != NULL) printf("%s ja foi declarado\n", $3.str);
-			  else insert(h, $3.str, "Array", savedLineNo, 0, atoi(tokenString));
+			  //$$.node->val.val_int = atoi(tokenString); /* $5.op; */
+			  $$.node->val.val_int = intTemp;
+			  			  
+			  if(lookup(h, $3.str) != NULL) 
+			     printf("%s ja foi declarado\n", $3.str);
+			  else 
+			     insert(h, $3.str, "Array", savedLineNo, 0, atoi(tokenString));
 			}
 		;
 

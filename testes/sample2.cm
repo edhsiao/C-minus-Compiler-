@@ -8,6 +8,7 @@ int abc (int qwe,float lol)
 	int bb;
 	int cc;
 	int dd;
+	int zzz[5324];
 	float ee[123];
 	float qre;
 

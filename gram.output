@@ -1,12 +1,12 @@
-Terminals unused in grammar
+Terminais não utilizados na gramática
 
    ERROR
 
 
-State 103 conflicts: 1 shift/reduce
+Estado 104 conflitos: 1 de deslocamento/redução
 
 
-Grammar
+Gramática
 
     0 $accept: program $end
 
@@ -22,255 +22,259 @@ Grammar
 
     7 @1: %empty
 
-    8 var_declaration: type_specifier ID @1 ACOL NUM FCOL PV
+    8 $@2: %empty
 
-    9 type_specifier: INT
-   10               | VOID
-   11               | FLOAT
+    9 var_declaration: type_specifier ID @1 ACOL NUM FCOL $@2 PV
 
-   12 @2: %empty
+   10 type_specifier: INT
+   11               | VOID
+   12               | FLOAT
 
-   13 fun_declaration: type_specifier ID @2 AP params FP compound_stmt
+   13 @3: %empty
 
-   14 params: param_list
-   15       | VOID
+   14 fun_declaration: type_specifier ID @3 AP params FP compound_stmt
 
-   16 param_list: param_list VIRG param
-   17           | param
+   15 params: param_list
+   16       | VOID
 
-   18 param: type_specifier ID
+   17 param_list: param_list VIRG param
+   18           | param
 
-   19 @3: %empty
+   19 param: type_specifier ID
 
-   20 param: type_specifier ID @3 ACOL FCOL
+   20 @4: %empty
 
-   21 compound_stmt: ACH local_declarations stmt_list FCH
+   21 param: type_specifier ID @4 ACOL FCOL
 
-   22 local_declarations: local_declarations var_declaration
-   23                   | %empty
+   22 compound_stmt: ACH local_declarations stmt_list FCH
 
-   24 stmt_list: stmt_list stmt
-   25          | %empty
+   23 local_declarations: local_declarations var_declaration
+   24                   | %empty
 
-   26 stmt: expr_stmt
-   27     | compound_stmt
-   28     | selection_stmt
-   29     | iteration_stmt
-   30     | return_stmt
+   25 stmt_list: stmt_list stmt
+   26          | %empty
 
-   31 expr_stmt: expr PV
-   32          | PV
+   27 stmt: expr_stmt
+   28     | compound_stmt
+   29     | selection_stmt
+   30     | iteration_stmt
+   31     | return_stmt
 
-   33 selection_stmt: IF AP expr FP stmt
-   34               | IF AP expr FP stmt ELSE stmt
+   32 expr_stmt: expr PV
+   33          | PV
 
-   35 iteration_stmt: WHILE AP expr FP stmt
+   34 selection_stmt: IF AP expr FP stmt
+   35               | IF AP expr FP stmt ELSE stmt
 
-   36 return_stmt: RETURN PV
-   37            | RETURN expr PV
+   36 iteration_stmt: WHILE AP expr FP stmt
 
-   38 expr: var ATRIB expr
-   39     | simple_expr
+   37 return_stmt: RETURN PV
+   38            | RETURN expr PV
 
-   40 var: ID
+   39 expr: var ATRIB expr
+   40     | simple_expr
 
-   41 @4: %empty
+   41 var: ID
 
-   42 var: ID @4 ACOL expr FCOL
+   42 @5: %empty
 
-   43 simple_expr: additive_expr relop additive_expr
-   44            | additive_expr
-   45            | additive_expr error
+   43 var: ID @5 ACOL expr FCOL
 
-   46 relop: MENORIG
-   47      | MENOR
-   48      | MAIOR
-   49      | MAIORIG
-   50      | IG
-   51      | DIF
+   44 simple_expr: additive_expr relop additive_expr
+   45            | additive_expr
+   46            | additive_expr error
 
-   52 additive_expr: additive_expr addop term
-   53              | term
-   54              | error
+   47 relop: MENORIG
+   48      | MENOR
+   49      | MAIOR
+   50      | MAIORIG
+   51      | IG
+   52      | DIF
 
-   55 addop: SOMA
-   56      | SUB
+   53 additive_expr: additive_expr addop term
+   54              | term
+   55              | error
 
-   57 term: term mulop factor
-   58     | factor
+   56 addop: SOMA
+   57      | SUB
 
-   59 mulop: MUL
-   60      | DIV
+   58 term: term mulop factor
+   59     | factor
 
-   61 factor: AP expr FP
-   62       | var
-   63       | call
-   64       | NUM
-   65       | NUM_FLOAT
+   60 mulop: MUL
+   61      | DIV
 
-   66 @5: %empty
+   62 factor: AP expr FP
+   63       | var
+   64       | call
+   65       | NUM
+   66       | NUM_FLOAT
 
-   67 call: ID @5 AP args FP
+   67 @6: %empty
 
-   68 args: arg_list
-   69     | %empty
+   68 call: ID @6 AP args FP
 
-   70 arg_list: arg_list VIRG expr
-   71         | expr
+   69 args: arg_list
+   70     | %empty
+
+   71 arg_list: arg_list VIRG expr
+   72         | expr
 
 
-Terminals, with rules where they appear
+Terminais, com as regras onde eles aparecem
 
 $end (0) 0
-error (256) 45 54
-ELSE (258) 34
-IF (259) 33 34
-INT (260) 9
-FLOAT (261) 11
-RETURN (262) 36 37
-VOID (263) 10 15
-WHILE (264) 35
-ID (265) 6 8 13 18 20 40 42 67
-NUM (266) 8 64
-NUM_FLOAT (267) 65
-SOMA (268) 55
-SUB (269) 56
-MUL (270) 59
-DIV (271) 60
-MENOR (272) 47
-MENORIG (273) 46
-MAIOR (274) 48
-MAIORIG (275) 49
-IG (276) 50
-DIF (277) 51
-ATRIB (278) 38
-PV (279) 6 8 31 32 36 37
-VIRG (280) 16 70
-AP (281) 13 33 34 35 61 67
-FP (282) 13 33 34 35 61 67
-ACOL (283) 8 20 42
-FCOL (284) 8 20 42
-ACH (285) 21
-FCH (286) 21
+error (256) 46 55
+ELSE (258) 35
+IF (259) 34 35
+INT (260) 10
+FLOAT (261) 12
+RETURN (262) 37 38
+VOID (263) 11 16
+WHILE (264) 36
+ID (265) 6 9 14 19 21 41 43 68
+NUM (266) 9 65
+NUM_FLOAT (267) 66
+SOMA (268) 56
+SUB (269) 57
+MUL (270) 60
+DIV (271) 61
+MENOR (272) 48
+MENORIG (273) 47
+MAIOR (274) 49
+MAIORIG (275) 50
+IG (276) 51
+DIF (277) 52
+ATRIB (278) 39
+PV (279) 6 9 32 33 37 38
+VIRG (280) 17 71
+AP (281) 14 34 35 36 62 68
+FP (282) 14 34 35 36 62 68
+ACOL (283) 9 21 43
+FCOL (284) 9 21 43
+ACH (285) 22
+FCH (286) 22
 ERROR (287)
 
 
-Nonterminals, with rules where they appear
+Não-terminais com as regras onde eles aparecem
 
 $accept (33)
-    on left: 0
+    à esquerda: 0
 program (34)
-    on left: 1, on right: 0
+    à esquerda: 1, à direita: 0
 declaration_list (35)
-    on left: 2 3, on right: 1 2
+    à esquerda: 2 3, à direita: 1 2
 declaration (36)
-    on left: 4 5, on right: 2 3
+    à esquerda: 4 5, à direita: 2 3
 var_declaration (37)
-    on left: 6 8, on right: 4 22
+    à esquerda: 6 9, à direita: 4 23
 @1 (38)
-    on left: 7, on right: 8
-type_specifier (39)
-    on left: 9 10 11, on right: 6 8 13 18 20
-fun_declaration (40)
-    on left: 13, on right: 5
-@2 (41)
-    on left: 12, on right: 13
-params (42)
-    on left: 14 15, on right: 13
-param_list (43)
-    on left: 16 17, on right: 14 16
-param (44)
-    on left: 18 20, on right: 16 17
-@3 (45)
-    on left: 19, on right: 20
-compound_stmt (46)
-    on left: 21, on right: 13 27
-local_declarations (47)
-    on left: 22 23, on right: 21 22
-stmt_list (48)
-    on left: 24 25, on right: 21 24
-stmt (49)
-    on left: 26 27 28 29 30, on right: 24 33 34 35
-expr_stmt (50)
-    on left: 31 32, on right: 26
-selection_stmt (51)
-    on left: 33 34, on right: 28
-iteration_stmt (52)
-    on left: 35, on right: 29
-return_stmt (53)
-    on left: 36 37, on right: 30
-expr (54)
-    on left: 38 39, on right: 31 33 34 35 37 38 42 61 70 71
-var (55)
-    on left: 40 42, on right: 38 62
-@4 (56)
-    on left: 41, on right: 42
-simple_expr (57)
-    on left: 43 44 45, on right: 39
-relop (58)
-    on left: 46 47 48 49 50 51, on right: 43
-additive_expr (59)
-    on left: 52 53 54, on right: 43 44 45 52
-addop (60)
-    on left: 55 56, on right: 52
-term (61)
-    on left: 57 58, on right: 52 53 57
-mulop (62)
-    on left: 59 60, on right: 57
-factor (63)
-    on left: 61 62 63 64 65, on right: 57 58
-call (64)
-    on left: 67, on right: 63
-@5 (65)
-    on left: 66, on right: 67
-args (66)
-    on left: 68 69, on right: 67
-arg_list (67)
-    on left: 70 71, on right: 68 70
+    à esquerda: 7, à direita: 9
+$@2 (39)
+    à esquerda: 8, à direita: 9
+type_specifier (40)
+    à esquerda: 10 11 12, à direita: 6 9 14 19 21
+fun_declaration (41)
+    à esquerda: 14, à direita: 5
+@3 (42)
+    à esquerda: 13, à direita: 14
+params (43)
+    à esquerda: 15 16, à direita: 14
+param_list (44)
+    à esquerda: 17 18, à direita: 15 17
+param (45)
+    à esquerda: 19 21, à direita: 17 18
+@4 (46)
+    à esquerda: 20, à direita: 21
+compound_stmt (47)
+    à esquerda: 22, à direita: 14 28
+local_declarations (48)
+    à esquerda: 23 24, à direita: 22 23
+stmt_list (49)
+    à esquerda: 25 26, à direita: 22 25
+stmt (50)
+    à esquerda: 27 28 29 30 31, à direita: 25 34 35 36
+expr_stmt (51)
+    à esquerda: 32 33, à direita: 27
+selection_stmt (52)
+    à esquerda: 34 35, à direita: 29
+iteration_stmt (53)
+    à esquerda: 36, à direita: 30
+return_stmt (54)
+    à esquerda: 37 38, à direita: 31
+expr (55)
+    à esquerda: 39 40, à direita: 32 34 35 36 38 39 43 62 71 72
+var (56)
+    à esquerda: 41 43, à direita: 39 63
+@5 (57)
+    à esquerda: 42, à direita: 43
+simple_expr (58)
+    à esquerda: 44 45 46, à direita: 40
+relop (59)
+    à esquerda: 47 48 49 50 51 52, à direita: 44
+additive_expr (60)
+    à esquerda: 53 54 55, à direita: 44 45 46 53
+addop (61)
+    à esquerda: 56 57, à direita: 53
+term (62)
+    à esquerda: 58 59, à direita: 53 54 58
+mulop (63)
+    à esquerda: 60 61, à direita: 58
+factor (64)
+    à esquerda: 62 63 64 65 66, à direita: 58 59
+call (65)
+    à esquerda: 68, à direita: 64
+@6 (66)
+    à esquerda: 67, à direita: 68
+args (67)
+    à esquerda: 69 70, à direita: 68
+arg_list (68)
+    à esquerda: 71 72, à direita: 69 71
 
 
 State 0
 
     0 $accept: . program $end
 
-    INT    shift, and go to state 1
-    FLOAT  shift, and go to state 2
-    VOID   shift, and go to state 3
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    VOID   deslocar, e ir ao estado 3
 
-    program           go to state 4
-    declaration_list  go to state 5
-    declaration       go to state 6
-    var_declaration   go to state 7
-    type_specifier    go to state 8
-    fun_declaration   go to state 9
+    program           ir ao estado 4
+    declaration_list  ir ao estado 5
+    declaration       ir ao estado 6
+    var_declaration   ir ao estado 7
+    type_specifier    ir ao estado 8
+    fun_declaration   ir ao estado 9
 
 
 State 1
 
-    9 type_specifier: INT .
+   10 type_specifier: INT .
 
-    $default  reduce using rule 9 (type_specifier)
+    $padrão  reduzir usando a regra 10 (type_specifier)
 
 
 State 2
 
-   11 type_specifier: FLOAT .
+   12 type_specifier: FLOAT .
 
-    $default  reduce using rule 11 (type_specifier)
+    $padrão  reduzir usando a regra 12 (type_specifier)
 
 
 State 3
 
-   10 type_specifier: VOID .
+   11 type_specifier: VOID .
 
-    $default  reduce using rule 10 (type_specifier)
+    $padrão  reduzir usando a regra 11 (type_specifier)
 
 
 State 4
 
     0 $accept: program . $end
 
-    $end  shift, and go to state 10
+    $end  deslocar, e ir ao estado 10
 
 
 State 5
@@ -278,1078 +282,1087 @@ State 5
     1 program: declaration_list .
     2 declaration_list: declaration_list . declaration
 
-    INT    shift, and go to state 1
-    FLOAT  shift, and go to state 2
-    VOID   shift, and go to state 3
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    VOID   deslocar, e ir ao estado 3
 
-    $default  reduce using rule 1 (program)
+    $padrão  reduzir usando a regra 1 (program)
 
-    declaration      go to state 11
-    var_declaration  go to state 7
-    type_specifier   go to state 8
-    fun_declaration  go to state 9
+    declaration      ir ao estado 11
+    var_declaration  ir ao estado 7
+    type_specifier   ir ao estado 8
+    fun_declaration  ir ao estado 9
 
 
 State 6
 
     3 declaration_list: declaration .
 
-    $default  reduce using rule 3 (declaration_list)
+    $padrão  reduzir usando a regra 3 (declaration_list)
 
 
 State 7
 
     4 declaration: var_declaration .
 
-    $default  reduce using rule 4 (declaration)
+    $padrão  reduzir usando a regra 4 (declaration)
 
 
 State 8
 
     6 var_declaration: type_specifier . ID PV
-    8                | type_specifier . ID @1 ACOL NUM FCOL PV
-   13 fun_declaration: type_specifier . ID @2 AP params FP compound_stmt
+    9                | type_specifier . ID @1 ACOL NUM FCOL $@2 PV
+   14 fun_declaration: type_specifier . ID @3 AP params FP compound_stmt
 
-    ID  shift, and go to state 12
+    ID  deslocar, e ir ao estado 12
 
 
 State 9
 
     5 declaration: fun_declaration .
 
-    $default  reduce using rule 5 (declaration)
+    $padrão  reduzir usando a regra 5 (declaration)
 
 
 State 10
 
     0 $accept: program $end .
 
-    $default  accept
+    $padrão  aceitar
 
 
 State 11
 
     2 declaration_list: declaration_list declaration .
 
-    $default  reduce using rule 2 (declaration_list)
+    $padrão  reduzir usando a regra 2 (declaration_list)
 
 
 State 12
 
     6 var_declaration: type_specifier ID . PV
-    8                | type_specifier ID . @1 ACOL NUM FCOL PV
-   13 fun_declaration: type_specifier ID . @2 AP params FP compound_stmt
+    9                | type_specifier ID . @1 ACOL NUM FCOL $@2 PV
+   14 fun_declaration: type_specifier ID . @3 AP params FP compound_stmt
 
-    PV  shift, and go to state 13
+    PV  deslocar, e ir ao estado 13
 
-    AP        reduce using rule 12 (@2)
-    $default  reduce using rule 7 (@1)
+    AP        reduzir usando a regra 13 (@3)
+    $padrão  reduzir usando a regra 7 (@1)
 
-    @1  go to state 14
-    @2  go to state 15
+    @1  ir ao estado 14
+    @3  ir ao estado 15
 
 
 State 13
 
     6 var_declaration: type_specifier ID PV .
 
-    $default  reduce using rule 6 (var_declaration)
+    $padrão  reduzir usando a regra 6 (var_declaration)
 
 
 State 14
 
-    8 var_declaration: type_specifier ID @1 . ACOL NUM FCOL PV
+    9 var_declaration: type_specifier ID @1 . ACOL NUM FCOL $@2 PV
 
-    ACOL  shift, and go to state 16
+    ACOL  deslocar, e ir ao estado 16
 
 
 State 15
 
-   13 fun_declaration: type_specifier ID @2 . AP params FP compound_stmt
+   14 fun_declaration: type_specifier ID @3 . AP params FP compound_stmt
 
-    AP  shift, and go to state 17
+    AP  deslocar, e ir ao estado 17
 
 
 State 16
 
-    8 var_declaration: type_specifier ID @1 ACOL . NUM FCOL PV
+    9 var_declaration: type_specifier ID @1 ACOL . NUM FCOL $@2 PV
 
-    NUM  shift, and go to state 18
+    NUM  deslocar, e ir ao estado 18
 
 
 State 17
 
-   13 fun_declaration: type_specifier ID @2 AP . params FP compound_stmt
+   14 fun_declaration: type_specifier ID @3 AP . params FP compound_stmt
 
-    INT    shift, and go to state 1
-    FLOAT  shift, and go to state 2
-    VOID   shift, and go to state 19
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    VOID   deslocar, e ir ao estado 19
 
-    type_specifier  go to state 20
-    params          go to state 21
-    param_list      go to state 22
-    param           go to state 23
+    type_specifier  ir ao estado 20
+    params          ir ao estado 21
+    param_list      ir ao estado 22
+    param           ir ao estado 23
 
 
 State 18
 
-    8 var_declaration: type_specifier ID @1 ACOL NUM . FCOL PV
+    9 var_declaration: type_specifier ID @1 ACOL NUM . FCOL $@2 PV
 
-    FCOL  shift, and go to state 24
+    FCOL  deslocar, e ir ao estado 24
 
 
 State 19
 
-   10 type_specifier: VOID .
-   15 params: VOID .
+   11 type_specifier: VOID .
+   16 params: VOID .
 
-    FP        reduce using rule 15 (params)
-    $default  reduce using rule 10 (type_specifier)
+    FP        reduzir usando a regra 16 (params)
+    $padrão  reduzir usando a regra 11 (type_specifier)
 
 
 State 20
 
-   18 param: type_specifier . ID
-   20      | type_specifier . ID @3 ACOL FCOL
+   19 param: type_specifier . ID
+   21      | type_specifier . ID @4 ACOL FCOL
 
-    ID  shift, and go to state 25
+    ID  deslocar, e ir ao estado 25
 
 
 State 21
 
-   13 fun_declaration: type_specifier ID @2 AP params . FP compound_stmt
+   14 fun_declaration: type_specifier ID @3 AP params . FP compound_stmt
 
-    FP  shift, and go to state 26
+    FP  deslocar, e ir ao estado 26
 
 
 State 22
 
-   14 params: param_list .
-   16 param_list: param_list . VIRG param
+   15 params: param_list .
+   17 param_list: param_list . VIRG param
 
-    VIRG  shift, and go to state 27
+    VIRG  deslocar, e ir ao estado 27
 
-    $default  reduce using rule 14 (params)
+    $padrão  reduzir usando a regra 15 (params)
 
 
 State 23
 
-   17 param_list: param .
+   18 param_list: param .
 
-    $default  reduce using rule 17 (param_list)
+    $padrão  reduzir usando a regra 18 (param_list)
 
 
 State 24
 
-    8 var_declaration: type_specifier ID @1 ACOL NUM FCOL . PV
+    9 var_declaration: type_specifier ID @1 ACOL NUM FCOL . $@2 PV
 
-    PV  shift, and go to state 28
+    $padrão  reduzir usando a regra 8 ($@2)
+
+    $@2  ir ao estado 28
 
 
 State 25
 
-   18 param: type_specifier ID .
-   20      | type_specifier ID . @3 ACOL FCOL
+   19 param: type_specifier ID .
+   21      | type_specifier ID . @4 ACOL FCOL
 
-    ACOL      reduce using rule 19 (@3)
-    $default  reduce using rule 18 (param)
+    ACOL      reduzir usando a regra 20 (@4)
+    $padrão  reduzir usando a regra 19 (param)
 
-    @3  go to state 29
+    @4  ir ao estado 29
 
 
 State 26
 
-   13 fun_declaration: type_specifier ID @2 AP params FP . compound_stmt
+   14 fun_declaration: type_specifier ID @3 AP params FP . compound_stmt
 
-    ACH  shift, and go to state 30
+    ACH  deslocar, e ir ao estado 30
 
-    compound_stmt  go to state 31
+    compound_stmt  ir ao estado 31
 
 
 State 27
 
-   16 param_list: param_list VIRG . param
+   17 param_list: param_list VIRG . param
 
-    INT    shift, and go to state 1
-    FLOAT  shift, and go to state 2
-    VOID   shift, and go to state 3
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    VOID   deslocar, e ir ao estado 3
 
-    type_specifier  go to state 20
-    param           go to state 32
+    type_specifier  ir ao estado 20
+    param           ir ao estado 32
 
 
 State 28
 
-    8 var_declaration: type_specifier ID @1 ACOL NUM FCOL PV .
+    9 var_declaration: type_specifier ID @1 ACOL NUM FCOL $@2 . PV
 
-    $default  reduce using rule 8 (var_declaration)
+    PV  deslocar, e ir ao estado 33
 
 
 State 29
 
-   20 param: type_specifier ID @3 . ACOL FCOL
+   21 param: type_specifier ID @4 . ACOL FCOL
 
-    ACOL  shift, and go to state 33
+    ACOL  deslocar, e ir ao estado 34
 
 
 State 30
 
-   21 compound_stmt: ACH . local_declarations stmt_list FCH
+   22 compound_stmt: ACH . local_declarations stmt_list FCH
 
-    $default  reduce using rule 23 (local_declarations)
+    $padrão  reduzir usando a regra 24 (local_declarations)
 
-    local_declarations  go to state 34
+    local_declarations  ir ao estado 35
 
 
 State 31
 
-   13 fun_declaration: type_specifier ID @2 AP params FP compound_stmt .
+   14 fun_declaration: type_specifier ID @3 AP params FP compound_stmt .
 
-    $default  reduce using rule 13 (fun_declaration)
+    $padrão  reduzir usando a regra 14 (fun_declaration)
 
 
 State 32
 
-   16 param_list: param_list VIRG param .
+   17 param_list: param_list VIRG param .
 
-    $default  reduce using rule 16 (param_list)
+    $padrão  reduzir usando a regra 17 (param_list)
 
 
 State 33
 
-   20 param: type_specifier ID @3 ACOL . FCOL
+    9 var_declaration: type_specifier ID @1 ACOL NUM FCOL $@2 PV .
 
-    FCOL  shift, and go to state 35
+    $padrão  reduzir usando a regra 9 (var_declaration)
 
 
 State 34
 
-   21 compound_stmt: ACH local_declarations . stmt_list FCH
-   22 local_declarations: local_declarations . var_declaration
+   21 param: type_specifier ID @4 ACOL . FCOL
 
-    INT    shift, and go to state 1
-    FLOAT  shift, and go to state 2
-    VOID   shift, and go to state 3
-
-    $default  reduce using rule 25 (stmt_list)
-
-    var_declaration  go to state 36
-    type_specifier   go to state 37
-    stmt_list        go to state 38
+    FCOL  deslocar, e ir ao estado 36
 
 
 State 35
 
-   20 param: type_specifier ID @3 ACOL FCOL .
+   22 compound_stmt: ACH local_declarations . stmt_list FCH
+   23 local_declarations: local_declarations . var_declaration
 
-    $default  reduce using rule 20 (param)
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    VOID   deslocar, e ir ao estado 3
+
+    $padrão  reduzir usando a regra 26 (stmt_list)
+
+    var_declaration  ir ao estado 37
+    type_specifier   ir ao estado 38
+    stmt_list        ir ao estado 39
 
 
 State 36
 
-   22 local_declarations: local_declarations var_declaration .
+   21 param: type_specifier ID @4 ACOL FCOL .
 
-    $default  reduce using rule 22 (local_declarations)
+    $padrão  reduzir usando a regra 21 (param)
 
 
 State 37
 
-    6 var_declaration: type_specifier . ID PV
-    8                | type_specifier . ID @1 ACOL NUM FCOL PV
+   23 local_declarations: local_declarations var_declaration .
 
-    ID  shift, and go to state 39
+    $padrão  reduzir usando a regra 23 (local_declarations)
 
 
 State 38
 
-   21 compound_stmt: ACH local_declarations stmt_list . FCH
-   24 stmt_list: stmt_list . stmt
+    6 var_declaration: type_specifier . ID PV
+    9                | type_specifier . ID @1 ACOL NUM FCOL $@2 PV
 
-    error      shift, and go to state 40
-    IF         shift, and go to state 41
-    RETURN     shift, and go to state 42
-    WHILE      shift, and go to state 43
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    PV         shift, and go to state 47
-    AP         shift, and go to state 48
-    ACH        shift, and go to state 30
-    FCH        shift, and go to state 49
-
-    compound_stmt   go to state 50
-    stmt            go to state 51
-    expr_stmt       go to state 52
-    selection_stmt  go to state 53
-    iteration_stmt  go to state 54
-    return_stmt     go to state 55
-    expr            go to state 56
-    var             go to state 57
-    simple_expr     go to state 58
-    additive_expr   go to state 59
-    term            go to state 60
-    factor          go to state 61
-    call            go to state 62
+    ID  deslocar, e ir ao estado 40
 
 
 State 39
 
-    6 var_declaration: type_specifier ID . PV
-    8                | type_specifier ID . @1 ACOL NUM FCOL PV
+   22 compound_stmt: ACH local_declarations stmt_list . FCH
+   25 stmt_list: stmt_list . stmt
 
-    PV  shift, and go to state 13
+    error      deslocar, e ir ao estado 41
+    IF         deslocar, e ir ao estado 42
+    RETURN     deslocar, e ir ao estado 43
+    WHILE      deslocar, e ir ao estado 44
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    PV         deslocar, e ir ao estado 48
+    AP         deslocar, e ir ao estado 49
+    ACH        deslocar, e ir ao estado 30
+    FCH        deslocar, e ir ao estado 50
 
-    $default  reduce using rule 7 (@1)
-
-    @1  go to state 14
+    compound_stmt   ir ao estado 51
+    stmt            ir ao estado 52
+    expr_stmt       ir ao estado 53
+    selection_stmt  ir ao estado 54
+    iteration_stmt  ir ao estado 55
+    return_stmt     ir ao estado 56
+    expr            ir ao estado 57
+    var             ir ao estado 58
+    simple_expr     ir ao estado 59
+    additive_expr   ir ao estado 60
+    term            ir ao estado 61
+    factor          ir ao estado 62
+    call            ir ao estado 63
 
 
 State 40
 
-   54 additive_expr: error .
+    6 var_declaration: type_specifier ID . PV
+    9                | type_specifier ID . @1 ACOL NUM FCOL $@2 PV
 
-    $default  reduce using rule 54 (additive_expr)
+    PV  deslocar, e ir ao estado 13
+
+    $padrão  reduzir usando a regra 7 (@1)
+
+    @1  ir ao estado 14
 
 
 State 41
 
-   33 selection_stmt: IF . AP expr FP stmt
-   34               | IF . AP expr FP stmt ELSE stmt
+   55 additive_expr: error .
 
-    AP  shift, and go to state 63
+    $padrão  reduzir usando a regra 55 (additive_expr)
 
 
 State 42
 
-   36 return_stmt: RETURN . PV
-   37            | RETURN . expr PV
+   34 selection_stmt: IF . AP expr FP stmt
+   35               | IF . AP expr FP stmt ELSE stmt
 
-    error      shift, and go to state 40
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    PV         shift, and go to state 64
-    AP         shift, and go to state 48
-
-    expr           go to state 65
-    var            go to state 57
-    simple_expr    go to state 58
-    additive_expr  go to state 59
-    term           go to state 60
-    factor         go to state 61
-    call           go to state 62
+    AP  deslocar, e ir ao estado 64
 
 
 State 43
 
-   35 iteration_stmt: WHILE . AP expr FP stmt
+   37 return_stmt: RETURN . PV
+   38            | RETURN . expr PV
 
-    AP  shift, and go to state 66
+    error      deslocar, e ir ao estado 41
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    PV         deslocar, e ir ao estado 65
+    AP         deslocar, e ir ao estado 49
+
+    expr           ir ao estado 66
+    var            ir ao estado 58
+    simple_expr    ir ao estado 59
+    additive_expr  ir ao estado 60
+    term           ir ao estado 61
+    factor         ir ao estado 62
+    call           ir ao estado 63
 
 
 State 44
 
-   40 var: ID .
-   42    | ID . @4 ACOL expr FCOL
-   67 call: ID . @5 AP args FP
+   36 iteration_stmt: WHILE . AP expr FP stmt
 
-    AP        reduce using rule 66 (@5)
-    ACOL      reduce using rule 41 (@4)
-    $default  reduce using rule 40 (var)
-
-    @4  go to state 67
-    @5  go to state 68
+    AP  deslocar, e ir ao estado 67
 
 
 State 45
 
-   64 factor: NUM .
+   41 var: ID .
+   43    | ID . @5 ACOL expr FCOL
+   68 call: ID . @6 AP args FP
 
-    $default  reduce using rule 64 (factor)
+    AP        reduzir usando a regra 67 (@6)
+    ACOL      reduzir usando a regra 42 (@5)
+    $padrão  reduzir usando a regra 41 (var)
+
+    @5  ir ao estado 68
+    @6  ir ao estado 69
 
 
 State 46
 
-   65 factor: NUM_FLOAT .
+   65 factor: NUM .
 
-    $default  reduce using rule 65 (factor)
+    $padrão  reduzir usando a regra 65 (factor)
 
 
 State 47
 
-   32 expr_stmt: PV .
+   66 factor: NUM_FLOAT .
 
-    $default  reduce using rule 32 (expr_stmt)
+    $padrão  reduzir usando a regra 66 (factor)
 
 
 State 48
 
-   61 factor: AP . expr FP
+   33 expr_stmt: PV .
 
-    error      shift, and go to state 40
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
-
-    expr           go to state 69
-    var            go to state 57
-    simple_expr    go to state 58
-    additive_expr  go to state 59
-    term           go to state 60
-    factor         go to state 61
-    call           go to state 62
+    $padrão  reduzir usando a regra 33 (expr_stmt)
 
 
 State 49
 
-   21 compound_stmt: ACH local_declarations stmt_list FCH .
+   62 factor: AP . expr FP
 
-    $default  reduce using rule 21 (compound_stmt)
+    error      deslocar, e ir ao estado 41
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
+
+    expr           ir ao estado 70
+    var            ir ao estado 58
+    simple_expr    ir ao estado 59
+    additive_expr  ir ao estado 60
+    term           ir ao estado 61
+    factor         ir ao estado 62
+    call           ir ao estado 63
 
 
 State 50
 
-   27 stmt: compound_stmt .
+   22 compound_stmt: ACH local_declarations stmt_list FCH .
 
-    $default  reduce using rule 27 (stmt)
+    $padrão  reduzir usando a regra 22 (compound_stmt)
 
 
 State 51
 
-   24 stmt_list: stmt_list stmt .
+   28 stmt: compound_stmt .
 
-    $default  reduce using rule 24 (stmt_list)
+    $padrão  reduzir usando a regra 28 (stmt)
 
 
 State 52
 
-   26 stmt: expr_stmt .
+   25 stmt_list: stmt_list stmt .
 
-    $default  reduce using rule 26 (stmt)
+    $padrão  reduzir usando a regra 25 (stmt_list)
 
 
 State 53
 
-   28 stmt: selection_stmt .
+   27 stmt: expr_stmt .
 
-    $default  reduce using rule 28 (stmt)
+    $padrão  reduzir usando a regra 27 (stmt)
 
 
 State 54
 
-   29 stmt: iteration_stmt .
+   29 stmt: selection_stmt .
 
-    $default  reduce using rule 29 (stmt)
+    $padrão  reduzir usando a regra 29 (stmt)
 
 
 State 55
 
-   30 stmt: return_stmt .
+   30 stmt: iteration_stmt .
 
-    $default  reduce using rule 30 (stmt)
+    $padrão  reduzir usando a regra 30 (stmt)
 
 
 State 56
 
-   31 expr_stmt: expr . PV
+   31 stmt: return_stmt .
 
-    PV  shift, and go to state 70
+    $padrão  reduzir usando a regra 31 (stmt)
 
 
 State 57
 
-   38 expr: var . ATRIB expr
-   62 factor: var .
+   32 expr_stmt: expr . PV
 
-    ATRIB  shift, and go to state 71
-
-    $default  reduce using rule 62 (factor)
+    PV  deslocar, e ir ao estado 71
 
 
 State 58
 
-   39 expr: simple_expr .
+   39 expr: var . ATRIB expr
+   63 factor: var .
 
-    $default  reduce using rule 39 (expr)
+    ATRIB  deslocar, e ir ao estado 72
+
+    $padrão  reduzir usando a regra 63 (factor)
 
 
 State 59
 
-   43 simple_expr: additive_expr . relop additive_expr
-   44            | additive_expr .
-   45            | additive_expr . error
-   52 additive_expr: additive_expr . addop term
+   40 expr: simple_expr .
 
-    error    shift, and go to state 72
-    SOMA     shift, and go to state 73
-    SUB      shift, and go to state 74
-    MENOR    shift, and go to state 75
-    MENORIG  shift, and go to state 76
-    MAIOR    shift, and go to state 77
-    MAIORIG  shift, and go to state 78
-    IG       shift, and go to state 79
-    DIF      shift, and go to state 80
-
-    PV    reduce using rule 44 (simple_expr)
-    VIRG  reduce using rule 44 (simple_expr)
-    FP    reduce using rule 44 (simple_expr)
-    FCOL  reduce using rule 44 (simple_expr)
-
-    relop  go to state 81
-    addop  go to state 82
+    $padrão  reduzir usando a regra 40 (expr)
 
 
 State 60
 
-   53 additive_expr: term .
-   57 term: term . mulop factor
+   44 simple_expr: additive_expr . relop additive_expr
+   45            | additive_expr .
+   46            | additive_expr . error
+   53 additive_expr: additive_expr . addop term
 
-    MUL  shift, and go to state 83
-    DIV  shift, and go to state 84
+    error    deslocar, e ir ao estado 73
+    SOMA     deslocar, e ir ao estado 74
+    SUB      deslocar, e ir ao estado 75
+    MENOR    deslocar, e ir ao estado 76
+    MENORIG  deslocar, e ir ao estado 77
+    MAIOR    deslocar, e ir ao estado 78
+    MAIORIG  deslocar, e ir ao estado 79
+    IG       deslocar, e ir ao estado 80
+    DIF      deslocar, e ir ao estado 81
 
-    $default  reduce using rule 53 (additive_expr)
+    PV    reduzir usando a regra 45 (simple_expr)
+    VIRG  reduzir usando a regra 45 (simple_expr)
+    FP    reduzir usando a regra 45 (simple_expr)
+    FCOL  reduzir usando a regra 45 (simple_expr)
 
-    mulop  go to state 85
+    relop  ir ao estado 82
+    addop  ir ao estado 83
 
 
 State 61
 
-   58 term: factor .
+   54 additive_expr: term .
+   58 term: term . mulop factor
 
-    $default  reduce using rule 58 (term)
+    MUL  deslocar, e ir ao estado 84
+    DIV  deslocar, e ir ao estado 85
+
+    $padrão  reduzir usando a regra 54 (additive_expr)
+
+    mulop  ir ao estado 86
 
 
 State 62
 
-   63 factor: call .
+   59 term: factor .
 
-    $default  reduce using rule 63 (factor)
+    $padrão  reduzir usando a regra 59 (term)
 
 
 State 63
 
-   33 selection_stmt: IF AP . expr FP stmt
-   34               | IF AP . expr FP stmt ELSE stmt
+   64 factor: call .
 
-    error      shift, and go to state 40
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
-
-    expr           go to state 86
-    var            go to state 57
-    simple_expr    go to state 58
-    additive_expr  go to state 59
-    term           go to state 60
-    factor         go to state 61
-    call           go to state 62
+    $padrão  reduzir usando a regra 64 (factor)
 
 
 State 64
 
-   36 return_stmt: RETURN PV .
+   34 selection_stmt: IF AP . expr FP stmt
+   35               | IF AP . expr FP stmt ELSE stmt
 
-    $default  reduce using rule 36 (return_stmt)
+    error      deslocar, e ir ao estado 41
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
+
+    expr           ir ao estado 87
+    var            ir ao estado 58
+    simple_expr    ir ao estado 59
+    additive_expr  ir ao estado 60
+    term           ir ao estado 61
+    factor         ir ao estado 62
+    call           ir ao estado 63
 
 
 State 65
 
-   37 return_stmt: RETURN expr . PV
+   37 return_stmt: RETURN PV .
 
-    PV  shift, and go to state 87
+    $padrão  reduzir usando a regra 37 (return_stmt)
 
 
 State 66
 
-   35 iteration_stmt: WHILE AP . expr FP stmt
+   38 return_stmt: RETURN expr . PV
 
-    error      shift, and go to state 40
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
-
-    expr           go to state 88
-    var            go to state 57
-    simple_expr    go to state 58
-    additive_expr  go to state 59
-    term           go to state 60
-    factor         go to state 61
-    call           go to state 62
+    PV  deslocar, e ir ao estado 88
 
 
 State 67
 
-   42 var: ID @4 . ACOL expr FCOL
+   36 iteration_stmt: WHILE AP . expr FP stmt
 
-    ACOL  shift, and go to state 89
+    error      deslocar, e ir ao estado 41
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
+
+    expr           ir ao estado 89
+    var            ir ao estado 58
+    simple_expr    ir ao estado 59
+    additive_expr  ir ao estado 60
+    term           ir ao estado 61
+    factor         ir ao estado 62
+    call           ir ao estado 63
 
 
 State 68
 
-   67 call: ID @5 . AP args FP
+   43 var: ID @5 . ACOL expr FCOL
 
-    AP  shift, and go to state 90
+    ACOL  deslocar, e ir ao estado 90
 
 
 State 69
 
-   61 factor: AP expr . FP
+   68 call: ID @6 . AP args FP
 
-    FP  shift, and go to state 91
+    AP  deslocar, e ir ao estado 91
 
 
 State 70
 
-   31 expr_stmt: expr PV .
+   62 factor: AP expr . FP
 
-    $default  reduce using rule 31 (expr_stmt)
+    FP  deslocar, e ir ao estado 92
 
 
 State 71
 
-   38 expr: var ATRIB . expr
+   32 expr_stmt: expr PV .
 
-    error      shift, and go to state 40
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
-
-    expr           go to state 92
-    var            go to state 57
-    simple_expr    go to state 58
-    additive_expr  go to state 59
-    term           go to state 60
-    factor         go to state 61
-    call           go to state 62
+    $padrão  reduzir usando a regra 32 (expr_stmt)
 
 
 State 72
 
-   45 simple_expr: additive_expr error .
+   39 expr: var ATRIB . expr
 
-    $default  reduce using rule 45 (simple_expr)
+    error      deslocar, e ir ao estado 41
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
+
+    expr           ir ao estado 93
+    var            ir ao estado 58
+    simple_expr    ir ao estado 59
+    additive_expr  ir ao estado 60
+    term           ir ao estado 61
+    factor         ir ao estado 62
+    call           ir ao estado 63
 
 
 State 73
 
-   55 addop: SOMA .
+   46 simple_expr: additive_expr error .
 
-    $default  reduce using rule 55 (addop)
+    $padrão  reduzir usando a regra 46 (simple_expr)
 
 
 State 74
 
-   56 addop: SUB .
+   56 addop: SOMA .
 
-    $default  reduce using rule 56 (addop)
+    $padrão  reduzir usando a regra 56 (addop)
 
 
 State 75
 
-   47 relop: MENOR .
+   57 addop: SUB .
 
-    $default  reduce using rule 47 (relop)
+    $padrão  reduzir usando a regra 57 (addop)
 
 
 State 76
 
-   46 relop: MENORIG .
+   48 relop: MENOR .
 
-    $default  reduce using rule 46 (relop)
+    $padrão  reduzir usando a regra 48 (relop)
 
 
 State 77
 
-   48 relop: MAIOR .
+   47 relop: MENORIG .
 
-    $default  reduce using rule 48 (relop)
+    $padrão  reduzir usando a regra 47 (relop)
 
 
 State 78
 
-   49 relop: MAIORIG .
+   49 relop: MAIOR .
 
-    $default  reduce using rule 49 (relop)
+    $padrão  reduzir usando a regra 49 (relop)
 
 
 State 79
 
-   50 relop: IG .
+   50 relop: MAIORIG .
 
-    $default  reduce using rule 50 (relop)
+    $padrão  reduzir usando a regra 50 (relop)
 
 
 State 80
 
-   51 relop: DIF .
+   51 relop: IG .
 
-    $default  reduce using rule 51 (relop)
+    $padrão  reduzir usando a regra 51 (relop)
 
 
 State 81
 
-   43 simple_expr: additive_expr relop . additive_expr
+   52 relop: DIF .
 
-    error      shift, and go to state 40
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
-
-    var            go to state 93
-    additive_expr  go to state 94
-    term           go to state 60
-    factor         go to state 61
-    call           go to state 62
+    $padrão  reduzir usando a regra 52 (relop)
 
 
 State 82
 
-   52 additive_expr: additive_expr addop . term
+   44 simple_expr: additive_expr relop . additive_expr
 
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
+    error      deslocar, e ir ao estado 41
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
 
-    var     go to state 93
-    term    go to state 95
-    factor  go to state 61
-    call    go to state 62
+    var            ir ao estado 94
+    additive_expr  ir ao estado 95
+    term           ir ao estado 61
+    factor         ir ao estado 62
+    call           ir ao estado 63
 
 
 State 83
 
-   59 mulop: MUL .
+   53 additive_expr: additive_expr addop . term
 
-    $default  reduce using rule 59 (mulop)
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
+
+    var     ir ao estado 94
+    term    ir ao estado 96
+    factor  ir ao estado 62
+    call    ir ao estado 63
 
 
 State 84
 
-   60 mulop: DIV .
+   60 mulop: MUL .
 
-    $default  reduce using rule 60 (mulop)
+    $padrão  reduzir usando a regra 60 (mulop)
 
 
 State 85
 
-   57 term: term mulop . factor
+   61 mulop: DIV .
 
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
-
-    var     go to state 93
-    factor  go to state 96
-    call    go to state 62
+    $padrão  reduzir usando a regra 61 (mulop)
 
 
 State 86
 
-   33 selection_stmt: IF AP expr . FP stmt
-   34               | IF AP expr . FP stmt ELSE stmt
+   58 term: term mulop . factor
 
-    FP  shift, and go to state 97
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
+
+    var     ir ao estado 94
+    factor  ir ao estado 97
+    call    ir ao estado 63
 
 
 State 87
 
-   37 return_stmt: RETURN expr PV .
+   34 selection_stmt: IF AP expr . FP stmt
+   35               | IF AP expr . FP stmt ELSE stmt
 
-    $default  reduce using rule 37 (return_stmt)
+    FP  deslocar, e ir ao estado 98
 
 
 State 88
 
-   35 iteration_stmt: WHILE AP expr . FP stmt
+   38 return_stmt: RETURN expr PV .
 
-    FP  shift, and go to state 98
+    $padrão  reduzir usando a regra 38 (return_stmt)
 
 
 State 89
 
-   42 var: ID @4 ACOL . expr FCOL
+   36 iteration_stmt: WHILE AP expr . FP stmt
 
-    error      shift, and go to state 40
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
-
-    expr           go to state 99
-    var            go to state 57
-    simple_expr    go to state 58
-    additive_expr  go to state 59
-    term           go to state 60
-    factor         go to state 61
-    call           go to state 62
+    FP  deslocar, e ir ao estado 99
 
 
 State 90
 
-   67 call: ID @5 AP . args FP
+   43 var: ID @5 ACOL . expr FCOL
 
-    error      shift, and go to state 40
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
+    error      deslocar, e ir ao estado 41
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
 
-    FP  reduce using rule 69 (args)
-
-    expr           go to state 100
-    var            go to state 57
-    simple_expr    go to state 58
-    additive_expr  go to state 59
-    term           go to state 60
-    factor         go to state 61
-    call           go to state 62
-    args           go to state 101
-    arg_list       go to state 102
+    expr           ir ao estado 100
+    var            ir ao estado 58
+    simple_expr    ir ao estado 59
+    additive_expr  ir ao estado 60
+    term           ir ao estado 61
+    factor         ir ao estado 62
+    call           ir ao estado 63
 
 
 State 91
 
-   61 factor: AP expr FP .
+   68 call: ID @6 AP . args FP
 
-    $default  reduce using rule 61 (factor)
+    error      deslocar, e ir ao estado 41
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
+
+    FP  reduzir usando a regra 70 (args)
+
+    expr           ir ao estado 101
+    var            ir ao estado 58
+    simple_expr    ir ao estado 59
+    additive_expr  ir ao estado 60
+    term           ir ao estado 61
+    factor         ir ao estado 62
+    call           ir ao estado 63
+    args           ir ao estado 102
+    arg_list       ir ao estado 103
 
 
 State 92
 
-   38 expr: var ATRIB expr .
+   62 factor: AP expr FP .
 
-    $default  reduce using rule 38 (expr)
+    $padrão  reduzir usando a regra 62 (factor)
 
 
 State 93
 
-   62 factor: var .
+   39 expr: var ATRIB expr .
 
-    $default  reduce using rule 62 (factor)
+    $padrão  reduzir usando a regra 39 (expr)
 
 
 State 94
 
-   43 simple_expr: additive_expr relop additive_expr .
-   52 additive_expr: additive_expr . addop term
+   63 factor: var .
 
-    SOMA  shift, and go to state 73
-    SUB   shift, and go to state 74
-
-    $default  reduce using rule 43 (simple_expr)
-
-    addop  go to state 82
+    $padrão  reduzir usando a regra 63 (factor)
 
 
 State 95
 
-   52 additive_expr: additive_expr addop term .
-   57 term: term . mulop factor
+   44 simple_expr: additive_expr relop additive_expr .
+   53 additive_expr: additive_expr . addop term
 
-    MUL  shift, and go to state 83
-    DIV  shift, and go to state 84
+    SOMA  deslocar, e ir ao estado 74
+    SUB   deslocar, e ir ao estado 75
 
-    $default  reduce using rule 52 (additive_expr)
+    $padrão  reduzir usando a regra 44 (simple_expr)
 
-    mulop  go to state 85
+    addop  ir ao estado 83
 
 
 State 96
 
-   57 term: term mulop factor .
+   53 additive_expr: additive_expr addop term .
+   58 term: term . mulop factor
 
-    $default  reduce using rule 57 (term)
+    MUL  deslocar, e ir ao estado 84
+    DIV  deslocar, e ir ao estado 85
+
+    $padrão  reduzir usando a regra 53 (additive_expr)
+
+    mulop  ir ao estado 86
 
 
 State 97
 
-   33 selection_stmt: IF AP expr FP . stmt
-   34               | IF AP expr FP . stmt ELSE stmt
+   58 term: term mulop factor .
 
-    error      shift, and go to state 40
-    IF         shift, and go to state 41
-    RETURN     shift, and go to state 42
-    WHILE      shift, and go to state 43
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    PV         shift, and go to state 47
-    AP         shift, and go to state 48
-    ACH        shift, and go to state 30
-
-    compound_stmt   go to state 50
-    stmt            go to state 103
-    expr_stmt       go to state 52
-    selection_stmt  go to state 53
-    iteration_stmt  go to state 54
-    return_stmt     go to state 55
-    expr            go to state 56
-    var             go to state 57
-    simple_expr     go to state 58
-    additive_expr   go to state 59
-    term            go to state 60
-    factor          go to state 61
-    call            go to state 62
+    $padrão  reduzir usando a regra 58 (term)
 
 
 State 98
 
-   35 iteration_stmt: WHILE AP expr FP . stmt
+   34 selection_stmt: IF AP expr FP . stmt
+   35               | IF AP expr FP . stmt ELSE stmt
 
-    error      shift, and go to state 40
-    IF         shift, and go to state 41
-    RETURN     shift, and go to state 42
-    WHILE      shift, and go to state 43
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    PV         shift, and go to state 47
-    AP         shift, and go to state 48
-    ACH        shift, and go to state 30
+    error      deslocar, e ir ao estado 41
+    IF         deslocar, e ir ao estado 42
+    RETURN     deslocar, e ir ao estado 43
+    WHILE      deslocar, e ir ao estado 44
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    PV         deslocar, e ir ao estado 48
+    AP         deslocar, e ir ao estado 49
+    ACH        deslocar, e ir ao estado 30
 
-    compound_stmt   go to state 50
-    stmt            go to state 104
-    expr_stmt       go to state 52
-    selection_stmt  go to state 53
-    iteration_stmt  go to state 54
-    return_stmt     go to state 55
-    expr            go to state 56
-    var             go to state 57
-    simple_expr     go to state 58
-    additive_expr   go to state 59
-    term            go to state 60
-    factor          go to state 61
-    call            go to state 62
+    compound_stmt   ir ao estado 51
+    stmt            ir ao estado 104
+    expr_stmt       ir ao estado 53
+    selection_stmt  ir ao estado 54
+    iteration_stmt  ir ao estado 55
+    return_stmt     ir ao estado 56
+    expr            ir ao estado 57
+    var             ir ao estado 58
+    simple_expr     ir ao estado 59
+    additive_expr   ir ao estado 60
+    term            ir ao estado 61
+    factor          ir ao estado 62
+    call            ir ao estado 63
 
 
 State 99
 
-   42 var: ID @4 ACOL expr . FCOL
+   36 iteration_stmt: WHILE AP expr FP . stmt
 
-    FCOL  shift, and go to state 105
+    error      deslocar, e ir ao estado 41
+    IF         deslocar, e ir ao estado 42
+    RETURN     deslocar, e ir ao estado 43
+    WHILE      deslocar, e ir ao estado 44
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    PV         deslocar, e ir ao estado 48
+    AP         deslocar, e ir ao estado 49
+    ACH        deslocar, e ir ao estado 30
+
+    compound_stmt   ir ao estado 51
+    stmt            ir ao estado 105
+    expr_stmt       ir ao estado 53
+    selection_stmt  ir ao estado 54
+    iteration_stmt  ir ao estado 55
+    return_stmt     ir ao estado 56
+    expr            ir ao estado 57
+    var             ir ao estado 58
+    simple_expr     ir ao estado 59
+    additive_expr   ir ao estado 60
+    term            ir ao estado 61
+    factor          ir ao estado 62
+    call            ir ao estado 63
 
 
 State 100
 
-   71 arg_list: expr .
+   43 var: ID @5 ACOL expr . FCOL
 
-    $default  reduce using rule 71 (arg_list)
+    FCOL  deslocar, e ir ao estado 106
 
 
 State 101
 
-   67 call: ID @5 AP args . FP
+   72 arg_list: expr .
 
-    FP  shift, and go to state 106
+    $padrão  reduzir usando a regra 72 (arg_list)
 
 
 State 102
 
-   68 args: arg_list .
-   70 arg_list: arg_list . VIRG expr
+   68 call: ID @6 AP args . FP
 
-    VIRG  shift, and go to state 107
-
-    $default  reduce using rule 68 (args)
+    FP  deslocar, e ir ao estado 107
 
 
 State 103
 
-   33 selection_stmt: IF AP expr FP stmt .
-   34               | IF AP expr FP stmt . ELSE stmt
+   69 args: arg_list .
+   71 arg_list: arg_list . VIRG expr
 
-    ELSE  shift, and go to state 108
+    VIRG  deslocar, e ir ao estado 108
 
-    ELSE      [reduce using rule 33 (selection_stmt)]
-    $default  reduce using rule 33 (selection_stmt)
+    $padrão  reduzir usando a regra 69 (args)
 
 
 State 104
 
-   35 iteration_stmt: WHILE AP expr FP stmt .
+   34 selection_stmt: IF AP expr FP stmt .
+   35               | IF AP expr FP stmt . ELSE stmt
 
-    $default  reduce using rule 35 (iteration_stmt)
+    ELSE  deslocar, e ir ao estado 109
+
+    ELSE      [reduzir usando a regra 34 (selection_stmt)]
+    $padrão  reduzir usando a regra 34 (selection_stmt)
 
 
 State 105
 
-   42 var: ID @4 ACOL expr FCOL .
+   36 iteration_stmt: WHILE AP expr FP stmt .
 
-    $default  reduce using rule 42 (var)
+    $padrão  reduzir usando a regra 36 (iteration_stmt)
 
 
 State 106
 
-   67 call: ID @5 AP args FP .
+   43 var: ID @5 ACOL expr FCOL .
 
-    $default  reduce using rule 67 (call)
+    $padrão  reduzir usando a regra 43 (var)
 
 
 State 107
 
-   70 arg_list: arg_list VIRG . expr
+   68 call: ID @6 AP args FP .
 
-    error      shift, and go to state 40
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    AP         shift, and go to state 48
-
-    expr           go to state 109
-    var            go to state 57
-    simple_expr    go to state 58
-    additive_expr  go to state 59
-    term           go to state 60
-    factor         go to state 61
-    call           go to state 62
+    $padrão  reduzir usando a regra 68 (call)
 
 
 State 108
 
-   34 selection_stmt: IF AP expr FP stmt ELSE . stmt
+   71 arg_list: arg_list VIRG . expr
 
-    error      shift, and go to state 40
-    IF         shift, and go to state 41
-    RETURN     shift, and go to state 42
-    WHILE      shift, and go to state 43
-    ID         shift, and go to state 44
-    NUM        shift, and go to state 45
-    NUM_FLOAT  shift, and go to state 46
-    PV         shift, and go to state 47
-    AP         shift, and go to state 48
-    ACH        shift, and go to state 30
+    error      deslocar, e ir ao estado 41
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    AP         deslocar, e ir ao estado 49
 
-    compound_stmt   go to state 50
-    stmt            go to state 110
-    expr_stmt       go to state 52
-    selection_stmt  go to state 53
-    iteration_stmt  go to state 54
-    return_stmt     go to state 55
-    expr            go to state 56
-    var             go to state 57
-    simple_expr     go to state 58
-    additive_expr   go to state 59
-    term            go to state 60
-    factor          go to state 61
-    call            go to state 62
+    expr           ir ao estado 110
+    var            ir ao estado 58
+    simple_expr    ir ao estado 59
+    additive_expr  ir ao estado 60
+    term           ir ao estado 61
+    factor         ir ao estado 62
+    call           ir ao estado 63
 
 
 State 109
 
-   70 arg_list: arg_list VIRG expr .
+   35 selection_stmt: IF AP expr FP stmt ELSE . stmt
 
-    $default  reduce using rule 70 (arg_list)
+    error      deslocar, e ir ao estado 41
+    IF         deslocar, e ir ao estado 42
+    RETURN     deslocar, e ir ao estado 43
+    WHILE      deslocar, e ir ao estado 44
+    ID         deslocar, e ir ao estado 45
+    NUM        deslocar, e ir ao estado 46
+    NUM_FLOAT  deslocar, e ir ao estado 47
+    PV         deslocar, e ir ao estado 48
+    AP         deslocar, e ir ao estado 49
+    ACH        deslocar, e ir ao estado 30
+
+    compound_stmt   ir ao estado 51
+    stmt            ir ao estado 111
+    expr_stmt       ir ao estado 53
+    selection_stmt  ir ao estado 54
+    iteration_stmt  ir ao estado 55
+    return_stmt     ir ao estado 56
+    expr            ir ao estado 57
+    var             ir ao estado 58
+    simple_expr     ir ao estado 59
+    additive_expr   ir ao estado 60
+    term            ir ao estado 61
+    factor          ir ao estado 62
+    call            ir ao estado 63
 
 
 State 110
 
-   34 selection_stmt: IF AP expr FP stmt ELSE stmt .
+   71 arg_list: arg_list VIRG expr .
 
-    $default  reduce using rule 34 (selection_stmt)
+    $padrão  reduzir usando a regra 71 (arg_list)
+
+
+State 111
+
+   35 selection_stmt: IF AP expr FP stmt ELSE stmt .
+
+    $padrão  reduzir usando a regra 35 (selection_stmt)

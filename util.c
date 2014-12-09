@@ -248,7 +248,6 @@ void printTree(TreeNode * tree) {
 		} else if (tree->nodekind == Exp) {
 			switch (tree->kind.exp) {
 			case Op:
-				/*fprintf(listing,"Op: ");*/
 				printToken(tree->op, "\0");
 				break;
 			case Const:
@@ -284,21 +283,13 @@ void printTree(TreeNode * tree) {
 				if (strcmp(tree->type, "Array") == 0)
 					fprintf(listing, " [%d]", tree->val.val_int);
 				fprintf(listing, "\n");
-				/*  if(tree->type == Void) fprintf(listing, "void\n");
-				 else if(tree->type == Integer) fprintf(listing, "integer\n");
-				 else if(tree->type == Array) fprintf(listing, "array\n");
-				 */break;
+				break;
 			case Fun:
 				fprintf(listing, "funcao '%s', %s\n", tree->name, tree->type);
-				/*  if(tree->type == Void) fprintf(listing, "void\n");
-				 else if(tree->type == Integer) fprintf(listing, "integer\n");
-				 */break;
+				break;
 			case Param:
 				fprintf(listing, "Parametro: %s, %s\n", tree->name, tree->type);
-				/*  if(tree->type == Void) fprintf(listing, "void\n");
-				 else if(tree->type == Integer) fprintf(listing, "integer\n");
-				 else if(tree->type == Array) fprintf(listing, "array\n");
-				 */break;
+				break;
 			case Type:
 				fprintf(listing, "Tipo: %s\n", tree->name);
 				break;
