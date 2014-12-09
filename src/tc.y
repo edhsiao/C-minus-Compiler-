@@ -1,9 +1,9 @@
 /****************************************************/
-/* File: tiny.y                                     */
-/* The TINY Yacc/Bison specification file           */
+/* Especificao YACC/Bison  C-menos                  */
 /****************************************************/
+
 %{
-#define YYPARSER /* distinguishes Yacc output from other code files */
+#define YYPARSER /* diferencia a saida do Yacc dos outros arquivos*/
 
 #include "globals.h"
 #include "util.h"
@@ -15,7 +15,7 @@
 #define YYSTYPE type_t
 static int savedLineNo;
 static int saved_col;
-static TreeNode * savedTree; /* stores syntax tree for later return */
+static TreeNode * savedTree; /*armazena a arvore de sintaxe para uso futura*/
 
 typedef union type_t type_t;
 
@@ -33,14 +33,14 @@ int yyerror(char * message)
   int i;
   //Node temp;
 
-  fprintf(listing,"\nSyntax error at line %d: col %d, at ",lineno,col);
+  fprintf(listing,"\nErro de sintaxe na linha %d: col %d, at ",lineno,col);
   printToken(yychar, next_token);
-  fprintf(listing,"Current line:\n%s\n",current_line);
+  fprintf(listing,"Linha Atual:\n%s\n",current_line);
 
   for(i = 1; i < strlen(current_line); i++)
     fprintf(listing,"-");
 
-/*  printf("Testing...\n");
+/*  printf("Testando...\n");
   temp = l->current;
   list_root(l);
   while(l->current != NULL)
@@ -50,7 +50,7 @@ int yyerror(char * message)
   }
   l->current = temp;
 //  list_kill(l);
-  printf("\nTest complete.\n");
+  printf("\nTeste completa.\n");
 */
   fprintf(listing,"^\n");
   return 0;
@@ -71,12 +71,12 @@ TreeNode * parse(void) {
 
 %token ELSE IF INT FLOAT RETURN VOID WHILE
 %token ID NUM NUM_FLOAT
-%token PLUS MINUS TIMES OVER LT LTEQ GT GTEQ EQ NEQ ASSIGN SEMICOLON COMMA LPAREN RPAREN LBRACKET RBRACKET LBRACE RBRACE
+%token SOMA SUB MUL DIV MENOR MENORIG MAIOR MAIORIG IG DIF ATRIB PV VIRG AP FP ACOL FCOL ACH FCH
 %token ERROR 
 
-%nonassoc LT LTEQ GT GTEQ EQ NEQ
-%left PLUS MINUS
-%left TIMES OVER
+%nonassoc MENOR MENORIG MAIOR MAIORIG IG DIF
+%left SOMA SUB
+%left MUL DIV
 
 %% 
 
@@ -106,12 +106,12 @@ declaration	: var_declaration
 			{ $$.node = $1.node; }
 		;
 
-var_declaration	: type_specifier ID SEMICOLON
+var_declaration	: type_specifier ID PV
 			{
 			  $$.node = newDeclNode(Var);
 			  $$.node->type = $1.str;
 			  $$.node->name = copyString(tokenString);
-			  if(lookup(h, tokenString) != NULL) printf("%s is previously declared\n", tokenString);
+			  if(lookup(h, tokenString) != NULL) printf("%s ja foi declarado\n", tokenString);
 			  else insert(h, tokenString, $1.str, lineno, 0, 0);
 			}
 		| type_specifier ID
@@ -119,14 +119,14 @@ var_declaration	: type_specifier ID SEMICOLON
 			  savedLineNo = lineno; 
 			  $$.str = copyString(tokenString);
 			}
-		LBRACKET NUM RBRACKET SEMICOLON
+		ACOL NUM FCOL PV
 			{
 			  $$.node = newDeclNode(Var);
 			  $$.node->type= copyString("Array");
 			  $$.node->name = $3.str;
 			  $$.node->lineno = savedLineNo;
 			  $$.node->val.val_int = atoi(tokenString); /* $5.op; */
-			  if(lookup(h, $3.str) != NULL) printf("%s is previously declared\n", $3.str);
+			  if(lookup(h, $3.str) != NULL) printf("%s ja foi declarado\n", $3.str);
 			  else insert(h, $3.str, "Array", savedLineNo, 0, atoi(tokenString));
 			}
 		;
@@ -134,7 +134,7 @@ var_declaration	: type_specifier ID SEMICOLON
 type_specifier	: 
 		INT
 			{
-			  $$.str = copyString("Integer");
+			  $$.str = copyString("Inteiro");
 			}
 		| VOID
 			{
@@ -148,11 +148,11 @@ type_specifier	:
 
 fun_declaration	: type_specifier ID 
 			{
-			  printf("New scope\n");
+			  printf("Novo escopo\n");
 			  savedLineNo = lineno;
 			  $$.str = copyString(tokenString);
 			}
-			LPAREN params RPAREN compound_stmt
+			AP params FP compound_stmt
 			{
 			  $$.node = newDeclNode(Fun);
 			  $$.node->name = $3.str;
@@ -160,7 +160,7 @@ fun_declaration	: type_specifier ID
 			  $$.node->type = $1.str;
 			  $$.node->child[0] = $5.node;
 			  $$.node->child[1] = $7.node;
-			  if(lookup(h, $3.str) != NULL) printf("%s is previously declared\n", $3.str);
+			  if(lookup(h, $3.str) != NULL) printf("%s ja foi declarado\n", $3.str);
 			  else insert(h, $3.str, $1.str, savedLineNo, 0, 0);
 			}
 		;
@@ -170,7 +170,7 @@ params	: param_list
 	| VOID
 	;
 
-param_list	: param_list COMMA param
+param_list	: param_list VIRG param
 			{
 			  TreeNode * t = $1.node;
 			  if (t != NULL)
@@ -191,7 +191,7 @@ param	: type_specifier ID
 		  $$.node = newDeclNode(Param);
 		  $$.node->type = $1.str;
 		  $$.node->name = copyString(tokenString);
-		  if(lookup(h, tokenString) != NULL) printf("%s is previously declared\n", tokenString);
+		  if(lookup(h, tokenString) != NULL) printf("%s ja foi declarado\n", tokenString);
 		  else insert(h, tokenString, $1.str, 0, 0, 0);
 		}
 	| type_specifier ID
@@ -199,18 +199,18 @@ param	: type_specifier ID
 		  savedLineNo = lineno;
 		  $$.str = copyString(tokenString);
 		}
-			LBRACKET RBRACKET
+			ACOL FCOL
 		{
 		  $$.node = newDeclNode(Param);
 		  $$.node->type = $1.str;
 		  $$.node->name = $3.str;
 		  $$.node->lineno = savedLineNo;
-		  if(lookup(h, $3.str) != NULL) printf("%s is previously declared\n", $3.str);
+		  if(lookup(h, $3.str) != NULL) printf("%s ja foi declarado\n", $3.str);
 		  else insert(h, $3.str, "Array", savedLineNo, 0, 0);
 		}
 	;
 
-compound_stmt	: LBRACE local_declarations stmt_list RBRACE
+compound_stmt	: ACH local_declarations stmt_list FCH
 			{
 			  $$.node = newStmtNode(Cmpd);
 			  $$.node->child[0] = $2.node;
@@ -236,7 +236,7 @@ local_declarations	: local_declarations var_declaration
 					 $$.node = $2.node;
 				  }
 				}
-			| { $$.node = NULL; printf("New scope\n"); }
+			| { $$.node = NULL; printf("Novo escopo\n"); }
 			;
 
 stmt_list	: stmt_list stmt
@@ -266,18 +266,18 @@ stmt	: expr_stmt
 		{ saved_col = col; $$.node = $1.node; }
 	;
 
-expr_stmt	: expr SEMICOLON
+expr_stmt	: expr PV
 			{ $$.node = $1.node; }
-		| SEMICOLON
+		| PV
 		;
 
-selection_stmt	: IF LPAREN expr RPAREN stmt
+selection_stmt	: IF AP expr FP stmt
 			{
 			  $$.node = newStmtNode(If);
 			  $$.node->child[0] = $3.node;
 			  $$.node->child[1] = $5.node;
 			}
-		| IF LPAREN expr RPAREN stmt ELSE stmt
+		| IF AP expr FP stmt ELSE stmt
 			{
 			  $$.node = newStmtNode(If);
 			  $$.node->child[0] = $3.node;
@@ -286,7 +286,7 @@ selection_stmt	: IF LPAREN expr RPAREN stmt
 			}
 		;
 
-iteration_stmt	: WHILE LBRACE expr RBRACE stmt
+iteration_stmt	: WHILE AP expr FP stmt
 			{
 			  $$.node = newStmtNode(Iter);
 			  $$.node->child[0] = $3.node;
@@ -294,23 +294,23 @@ iteration_stmt	: WHILE LBRACE expr RBRACE stmt
 			}
 		;
 
-return_stmt	: RETURN SEMICOLON
+return_stmt	: RETURN PV
 			{
 			  $$.node = newStmtNode(Return);
 			  $$.node->child[0] = NULL;
 			}
-		| RETURN expr SEMICOLON
+		| RETURN expr PV
 			{
 			  $$.node = newStmtNode(Return);
 			  $$.node->child[0] = $2.node;
 			}
 		;
 
-expr	: var ASSIGN expr
+expr	: var ATRIB expr
 		{
 		  $$.node = newStmtNode(Assign);
 		  $$.node->child[0] = $1.node;
-		  $$.node->op = ASSIGN; 
+		  $$.node->op = ATRIB; 
 		  $$.node->child[1] = $3.node;
 		}
 	| simple_expr
@@ -323,8 +323,8 @@ var	: ID
 		{
 		  if(lookup(h, tokenString) == NULL)
 		  {
-		    printf("%s undeclared \n", tokenString);
-		    insert(h, tokenString, "undeclared", 0, 0, 0);
+		    printf("%s nao declarado \n", tokenString);
+		    insert(h, tokenString, "nao declarado", 0, 0, 0);
 		  }
 		  $$.node = newExpNode(Id);
 		  $$.node->name = copyString(tokenString);
@@ -334,7 +334,7 @@ var	: ID
 		  savedLineNo = lineno;
 		  $$.str = copyString(tokenString);
 		}
-		LBRACKET expr RBRACKET
+		ACOL expr FCOL
 		{
 		  $$.node = newExpNode(Id);
 		  $$.node->name = $2.str;
@@ -343,7 +343,7 @@ var	: ID
 		  if(lookup(h, $2.str) == NULL)
 		  {
 		    printf("%s undeclared\n", $2.str);
-		    insert(h, $2.str, "undeclared", 0, 0, 0);
+		    insert(h, $2.str, "nao declarado", 0, 0, 0);
 		  }
 		}
 	;
@@ -361,34 +361,34 @@ simple_expr	: additive_expr relop additive_expr
 			{
 			  $$.node = newErrNode();
 			  $$.node->name = copyString(current_line);
-			  $$.node->expected = copyString("Relation or Additive expression (eg '1 != 0' or '4 + 6')");
+			  $$.node->expected = copyString("Relation ou Additive expression (eg '1 != 0' or '4 + 6')");
 			  $$.node->col = col;
 			}
 		;
 
-relop : LTEQ
+relop : MENORIG
 		{
-		  $$.op = LTEQ;
+		  $$.op = MENORIG;
 		}
-	| LT
+	| MENOR
 		{ 
-		  $$.op = LT;
+		  $$.op = MENOR;
 		}
-	| GT	
+	| MAIOR	
 		{ 
-		  $$.op = GT;
+		  $$.op = MAIOR;
 		}
-	| GTEQ	
+	| MAIORIG	
 		{ 
-		  $$.op = GTEQ;
+		  $$.op = MAIORIG;
 		}
-	| EQ	
+	| IG	
 		{ 
-		  $$.op = EQ;
+		  $$.op = IG;
 		}
-	| NEQ	
+	| DIF	
 		{ 
-		  $$.op = NEQ;
+		  $$.op = DIF;
 		}
 	;
 
@@ -405,18 +405,18 @@ additive_expr	: additive_expr addop term
 			{
 		  $$.node = newErrNode();
 		  $$.node->name = copyString(current_line);
-		  $$.node->expected = copyString("Term (eg '5' or var_name)");
+		  $$.node->expected = copyString("Term (eg '5' ou var_name)");
 		  $$.node->col =  col;
 			}
 		;
 
-addop	: PLUS
+addop	: SOMA
 		{
-		  $$.op = PLUS;
+		  $$.op = SOMA;
 		}
-	| MINUS
+	| SUB
 		{
-		  $$.op = MINUS;
+		  $$.op = SUB;
 		}
 	;
 
@@ -431,17 +431,17 @@ term	: term mulop factor
 		{ $$.node = $1.node; }
 	;
 
-mulop	: TIMES
+mulop	: MUL
 		{ 
-		  $$.op = TIMES;
+		  $$.op = MUL;
 		}
-	| OVER
+	| DIV
 		{
-		  $$.op = OVER;
+		  $$.op = DIV;
 		}
 	;
 
-factor	: LPAREN expr RPAREN
+factor	: AP expr FP
 		{
 		  /*$$.node = newExpNode(Factor);
 		  $$.node->child[0] = $2.node;*/
@@ -470,7 +470,7 @@ call	: ID
 		  savedLineNo = lineno;
 		  $$.str = copyString(tokenString);
 		}
-		LPAREN args RPAREN
+		AP args FP
 		{
 		  $$.node = newStmtNode(Call);
 		  $$.node->name = $2.str;
@@ -483,7 +483,7 @@ args	: arg_list
 	| { $$.node = NULL; }
 	;
 
-arg_list	: arg_list COMMA expr
+arg_list	: arg_list VIRG expr
 			{
 			  TreeNode * t = $1.node;
         	          if (t != NULL)

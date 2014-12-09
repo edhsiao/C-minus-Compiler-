@@ -55,25 +55,25 @@ extern int yydebug;
     ID = 265,
     NUM = 266,
     NUM_FLOAT = 267,
-    PLUS = 268,
-    MINUS = 269,
-    TIMES = 270,
-    OVER = 271,
-    LT = 272,
-    LTEQ = 273,
-    GT = 274,
-    GTEQ = 275,
-    EQ = 276,
-    NEQ = 277,
-    ASSIGN = 278,
-    SEMICOLON = 279,
-    COMMA = 280,
-    LPAREN = 281,
-    RPAREN = 282,
-    LBRACKET = 283,
-    RBRACKET = 284,
-    LBRACE = 285,
-    RBRACE = 286,
+    SOMA = 268,
+    SUB = 269,
+    MUL = 270,
+    DIV = 271,
+    MENOR = 272,
+    MENORIG = 273,
+    MAIOR = 274,
+    MAIORIG = 275,
+    IG = 276,
+    DIF = 277,
+    ATRIB = 278,
+    PV = 279,
+    VIRG = 280,
+    AP = 281,
+    FP = 282,
+    ACOL = 283,
+    FCOL = 284,
+    ACH = 285,
+    FCH = 286,
     ERROR = 287
   };
 #endif
@@ -88,25 +88,25 @@ extern int yydebug;
 #define ID 265
 #define NUM 266
 #define NUM_FLOAT 267
-#define PLUS 268
-#define MINUS 269
-#define TIMES 270
-#define OVER 271
-#define LT 272
-#define LTEQ 273
-#define GT 274
-#define GTEQ 275
-#define EQ 276
-#define NEQ 277
-#define ASSIGN 278
-#define SEMICOLON 279
-#define COMMA 280
-#define LPAREN 281
-#define RPAREN 282
-#define LBRACKET 283
-#define RBRACKET 284
-#define LBRACE 285
-#define RBRACE 286
+#define SOMA 268
+#define SUB 269
+#define MUL 270
+#define DIV 271
+#define MENOR 272
+#define MENORIG 273
+#define MAIOR 274
+#define MAIORIG 275
+#define IG 276
+#define DIF 277
+#define ATRIB 278
+#define PV 279
+#define VIRG 280
+#define AP 281
+#define FP 282
+#define ACOL 283
+#define FCOL 284
+#define ACH 285
+#define FCH 286
 #define ERROR 287
 
 /* Value type.  */

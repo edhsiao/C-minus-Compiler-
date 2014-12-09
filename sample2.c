@@ -16,6 +16,7 @@ int abc (int qwe,float lol)
 
 	if( aa == bb )
 	{
+		while (aa <= cc)
 		aa = 5;
 	}
 	else
