@@ -31,9 +31,7 @@ struct _list
 #include "list.h"
 #include "useful.h"
 
-/* These are used to reset identifiers when no nodes or lists exist.
-   They are not thread safe. It's just for convenience and pretty.
-   See the note in node_kill for details */
+
 int existing_nodes = 0;
 int existing_lists = 0;
 
@@ -74,13 +72,7 @@ int node_kill(Node n)
   }
 
   existing_nodes--;
-  /* This global variable resets the set of identifiers for nodes.
 
-    Every successful creation increases it, and every deletion
-    decreases it. It's mostly to make results more intuitive when
-    running a program that regularly makes and destroys lists -
-    at the point that no nodes exist, id's start from one again. */
-  /* This is not thread safe. */
 
   if(NULL != n->free && NULL != n->v)
   {
@@ -115,7 +107,6 @@ List list_new()
     return NULL;
   }
 
-  /* See the note for existing nodes in node_kill */
   if(existing_lists == 0) i = 1;
 
   l->root = NULL;
@@ -137,7 +128,7 @@ int list_kill(List l)
     return got_null;
   }
 
-  /* See the note for existing nodes in node_kill */
+
   existing_lists--;
 
   l->current = l->root;
@@ -163,12 +154,12 @@ int list_add_front(List l, Node n)
   }
 
   n->next = l->root;
-  /* If there are no elements in the list, root is null. */
+
   if(NULL != l->root)
     l->root->prev = n;
   l->root = n;
 
-  /* make sure the list is in a good state for use */
+
   l->size += 1;
   if(1 == l->size)
     l->current = l->root;

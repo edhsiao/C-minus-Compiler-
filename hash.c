@@ -157,7 +157,7 @@ int print_hash(Hash h)
   HNode temp = NULL;
   int i;
 
-  printf("name\t\ttype\t\tline\t\tcol\t\tvalue\n");
+  printf("nome\t\ttipo\t\tlinha\t\tcoluna\t\tvalor\n");
   for(i = 0; i < HASH_SIZE; i++)
   {
     l = h->head[i];

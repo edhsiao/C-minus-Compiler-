@@ -73,7 +73,7 @@ int main( int argc, char * argv[] )
 	}
 
 	if(TraceAnalyze) {
-		fprintf(listing, "\nTabela de simbolo:\n");
+		fprintf(listing, "\nTabela de Simbolo:\n");
 		print_hash(h);
 	}
 	list_kill(l);
