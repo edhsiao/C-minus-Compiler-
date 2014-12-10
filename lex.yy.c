@@ -511,8 +511,6 @@ char *yytext;
 #include "scan.h"
 #include "gram.tab.h"
 #include "list.h"
-#include "hash.h"
-
 
 /*lexema dos identificador ou palavras reservadas */
 
@@ -521,9 +519,8 @@ char tokenString[MAXTOKENLEN+1];
 char next_token[MAXTOKENLEN+1];
 char current_line[100];
 int reset_flag = 0;
-Hash h = NULL;
 
-#line 527 "lex.yy.c"
+#line 524 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -710,10 +707,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 34 "gram.l"
+#line 31 "gram.l"
 
 
-#line 717 "lex.yy.c"
+#line 714 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -798,163 +795,163 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 36 "gram.l"
+#line 33 "gram.l"
 {col += 4; return ELSE;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 37 "gram.l"
+#line 34 "gram.l"
 {col += 2; return IF;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 38 "gram.l"
+#line 35 "gram.l"
 {col += 3; return INT;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 39 "gram.l"
+#line 36 "gram.l"
 {col += 5; return FLOAT;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 40 "gram.l"
+#line 37 "gram.l"
 {col += 6; return RETURN;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 41 "gram.l"
+#line 38 "gram.l"
 {col += 4; return VOID;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 42 "gram.l"
+#line 39 "gram.l"
 {col += 5; return WHILE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 43 "gram.l"
+#line 40 "gram.l"
 {col += 1; return SOMA;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 44 "gram.l"
+#line 41 "gram.l"
 {col += 1; return SUB;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 45 "gram.l"
+#line 42 "gram.l"
 {col += 1; return MUL;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 46 "gram.l"
+#line 43 "gram.l"
 {col += 1; return DIV;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 47 "gram.l"
+#line 44 "gram.l"
 {col += 1; return MENOR;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 48 "gram.l"
+#line 45 "gram.l"
 {col += 2; return MENORIG;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 49 "gram.l"
+#line 46 "gram.l"
 {col += 1; return MAIOR;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 50 "gram.l"
+#line 47 "gram.l"
 {col += 2; return MAIORIG;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 51 "gram.l"
+#line 48 "gram.l"
 {col += 2; return IG;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 52 "gram.l"
+#line 49 "gram.l"
 {col += 2; return DIF;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 53 "gram.l"
+#line 50 "gram.l"
 {col += 1; return ATRIB;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 54 "gram.l"
+#line 51 "gram.l"
 {col += 1; return PV;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 55 "gram.l"
+#line 52 "gram.l"
 {col += 1; return VIRG;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 56 "gram.l"
+#line 53 "gram.l"
 {col += 1; return AP;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 57 "gram.l"
+#line 54 "gram.l"
 {col += 1; return FP;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 58 "gram.l"
+#line 55 "gram.l"
 {col += 1; return ACOL;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 59 "gram.l"
+#line 56 "gram.l"
 {col += 1; return FCOL;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 60 "gram.l"
+#line 57 "gram.l"
 {col += 1; return ACH;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 61 "gram.l"
+#line 58 "gram.l"
 {col += 1; return FCH;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 62 "gram.l"
+#line 59 "gram.l"
 {col += strlen(yytext); return ID;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 63 "gram.l"
+#line 60 "gram.l"
 {col += strlen(yytext); return NUM;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 64 "gram.l"
+#line 61 "gram.l"
 {col += strlen(yytext); return NUM_FLOAT;}
 	YY_BREAK
 case 30:
 /* rule 30 can match eol */
 YY_RULE_SETUP
-#line 65 "gram.l"
+#line 62 "gram.l"
 {col = 0; reset_flag = 1; list_kill(l); l = list_new(); memset(current_line, 0, 100); lineno++;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 66 "gram.l"
+#line 63 "gram.l"
 {col += strlen(yytext); strcat(current_line, yytext); /* ignora espaco */}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 68 "gram.l"
+#line 65 "gram.l"
 { char c; int s = 0;
                   do
                   { c = input();
@@ -971,15 +968,15 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 81 "gram.l"
+#line 78 "gram.l"
 {col += strlen(yytext); return ERROR;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 83 "gram.l"
+#line 80 "gram.l"
 ECHO;
 	YY_BREAK
-#line 983 "lex.yy.c"
+#line 980 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1977,7 +1974,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 83 "gram.l"
+#line 80 "gram.l"
 
 
 

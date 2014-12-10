@@ -9,8 +9,6 @@
 #include "scan.h"
 #include "gram.tab.h"
 #include "list.h"
-#include "hash.h"
-
 
 /*lexema dos identificador ou palavras reservadas */
 
@@ -19,7 +17,6 @@ char tokenString[MAXTOKENLEN+1];
 char next_token[MAXTOKENLEN+1];
 char current_line[100];
 int reset_flag = 0;
-Hash h = NULL;
 
 %}
 

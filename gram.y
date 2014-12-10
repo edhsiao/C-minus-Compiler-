@@ -10,7 +10,6 @@
 #include "scan.h"
 #include "parse.h"
 #include "list.h"
-#include "hash.h"
 
 #define YYSTYPE type_t
 static int savedLineNo;
@@ -112,11 +111,6 @@ var_declaration	: type_specifier ID PV
 			  $$.node = newDeclNode(Var);
 			  $$.node->type = $1.str;
 			  $$.node->name = copyString(tokenString);
-			  
-			  if(lookup(h, tokenString) != NULL)
-			     printf("%s ja foi declarado\n", tokenString);
-			  else 
-			     insert(h, tokenString, $1.str, lineno, 0, 0);
 			}
 		| type_specifier ID
 			{
@@ -131,11 +125,6 @@ var_declaration	: type_specifier ID PV
 			  $$.node->lineno = savedLineNo;
 			  //$$.node->val.val_int = atoi(tokenString); /* $5.op; */
 			  $$.node->val.val_int = intTemp;
-			  			  
-			  if(lookup(h, $3.str) != NULL) 
-			     printf("%s ja foi declarado\n", $3.str);
-			  else 
-			     insert(h, $3.str, "Array", savedLineNo, 0, atoi(tokenString));
 			}
 		;
 
@@ -168,8 +157,6 @@ fun_declaration	: type_specifier ID
 			  $$.node->type = $1.str;
 			  $$.node->child[0] = $5.node;
 			  $$.node->child[1] = $7.node;
-			  if(lookup(h, $3.str) != NULL) printf("%s ja foi declarado\n", $3.str);
-			  else insert(h, $3.str, $1.str, savedLineNo, 0, 0);
 			}
 		;
 
@@ -199,8 +186,6 @@ param	: type_specifier ID
 		  $$.node = newDeclNode(Param);
 		  $$.node->type = $1.str;
 		  $$.node->name = copyString(tokenString);
-		  if(lookup(h, tokenString) != NULL) printf("%s ja foi declarado\n", tokenString);
-		  else insert(h, tokenString, $1.str, 0, 0, 0);
 		}
 	| type_specifier ID
 		{
@@ -213,8 +198,6 @@ param	: type_specifier ID
 		  $$.node->type = $1.str;
 		  $$.node->name = $3.str;
 		  $$.node->lineno = savedLineNo;
-		  if(lookup(h, $3.str) != NULL) printf("%s ja foi declarado\n", $3.str);
-		  else insert(h, $3.str, "Array", savedLineNo, 0, 0);
 		}
 	;
 
@@ -329,11 +312,6 @@ expr	: var ATRIB expr
 
 var	: ID
 		{
-		  if(lookup(h, tokenString) == NULL)
-		  {
-		    printf("%s nao declarado \n", tokenString);
-		    insert(h, tokenString, "nao declarado", 0, 0, 0);
-		  }
 		  $$.node = newExpNode(Id);
 		  $$.node->name = copyString(tokenString);
 		}
@@ -348,11 +326,6 @@ var	: ID
 		  $$.node->name = $2.str;
 		  $$.node->lineno = savedLineNo;
 		  $$.node->child[1] = $4.node;
-		  if(lookup(h, $2.str) == NULL)
-		  {
-		    printf("%s undeclared\n", $2.str);
-		    insert(h, $2.str, "nao declarado", 0, 0, 0);
-		  }
 		}
 	;
 

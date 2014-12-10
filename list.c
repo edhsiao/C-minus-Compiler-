@@ -1,30 +1,3 @@
-/*typedef struct _list list;
-typedef struct _list * List;
-
-typedef struct _node node;
-typedef struct _node * Node;
-
-struct _node
-{
-  struct _node *next;
-  struct _node *prev;
-  void *v;
-  int n;
-  int id;
-  char str[str_size];
-  int (*free)(void *);
-  int (*print)(void *);
-};
-
-struct _list
-{
-  struct node *root;
-  struct node *current;
-  int size;
-  int id;
-  char name[str_size];
-};*/
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -184,21 +157,16 @@ int list_add_back(List l, Node n)
   }
   else
   {
-    /* save current node's position */
     temp = l->current;  
     l->current = l->root;
 
-    /* find the end of the list */
     while(l->current->next != NULL)
     {
       l->current = l->current->next;
     }
 
-    /* link n into the end */
     l->current->next = n;
     n->prev = l->current;
-
-    /* restore current node */
     l->current = temp;
   }
 
@@ -215,9 +183,6 @@ int list_add_before(List l, Node n)
     return got_null;
   }
 
-  /* All of the hard edge cases are taken care of in front/back;
-     this function will only ever add to the middle.
-  */
   if(l->current == l->root)
   {
     list_add_front(l, n);
@@ -241,9 +206,6 @@ int list_add_after(List l, Node n)
     return got_null;
   }
 
-  /* All of the hardest edge cases are taken care of in front/back;
-     this function will only ever add to the middle.
-  */
   if(NULL == l->current || NULL == l->current->next)
   {
     list_add_back(l, n);
@@ -280,22 +242,16 @@ int list_remove(List l)
     node_kill(l->current);
     l->current = l->root;
 
-    /* if the root was alone, l->current is now NULL */
     if(NULL != l->current)
       l->current->prev = NULL;
   }
   else
   {
     temp = l->current;
-/*  printf("l, l->current: %p, %p\n", l, l->current); fflush(stdout);
-    printf("l->current->prev: %p\n", l->current->prev); fflush(stdout);
-    printf("l->current->next: %p\n", l->current->next); fflush(stdout);
-    printf("l->current->prev->next %p\n", l->current->prev->next); fflush(stdout);
-*/  l->current->prev->next = l->current->next;
+    l->current->prev->next = l->current->next;
     l->current = l->current->prev;
     node_kill(temp);
-    
-    /* if we didn't just remove the tail, fix the next node's prev */
+
     if(l->current->next != NULL)
       l->current->next->prev = l->current;
   }
@@ -377,7 +333,7 @@ int list_prev(List l)
 
   if(unset == status && NULL == l->current->prev)
   {
-    status = null_next; /* null_next is equal to null_prev */
+    status = null_next;
   }
 
   if(unset == status || null_next == status)
@@ -413,12 +369,9 @@ int list_print(List l)
   temp = l->current;
   l->current = l->root;
   while(l->current != NULL)
-  //while(success == list_next(l))
   {
     printf("-%d-\n", l->current->id);
     l->current = l->current->next;
-    /*printer = get_node(l);
-    printer->print(printer);*/
   }
   l->current = temp;
 

@@ -15,10 +15,10 @@
 #define TRUE 1
 #endif
 
-extern FILE* source;		/* Arquivo de entrada com o codigo fonte a ser compilado */
-extern FILE* listing; 		/* Saida de mensagens de print, arquivo ou o proprio terminal */
-extern int lineno; 			/* Linha do source sendo analisada no momento */
-extern int col; 			/* Coluna do caracter sendo analisado no momento */
+extern FILE* source;			/* Arquivo de entrada com o codigo fonte a ser compilado. */
+extern FILE* listing; 			/* Saida de mensagens de print, arquivo ou o proprio terminal. */
+extern int lineno; 				/* Linha do source sendo analisada no momento. */
+extern int col; 				/* Coluna do caracter sendo analisado no momento. */
 
 /* Constantes utilizada em todo o programa */
 #define MAXCHILDREN 3
@@ -27,7 +27,7 @@ typedef enum {If, Iter, Assign, Cmpd, Return, Call} StmtKind;
 typedef enum {Factor, Const, Additive, Simple, Id, Term, Op} ExpKind;
 typedef enum {Var, Fun, Param, Type} DeclKind;
 typedef enum {Params, Local, StmtList, AdditiveList, TermList, Args} ListKind;
-typedef enum {Dummy, Ummyd, Void,Integer,Float,Array} ExpType; /* Para a verificação de tipos */
+typedef enum {Dummy, Ummyd, Void, Integer, Float, Array} ExpType; /* Para a verificação de tipos */
 
 /* Estrutura de dados para aramzenar numeros inteiros e reais na mesma variavel */
 typedef union{
