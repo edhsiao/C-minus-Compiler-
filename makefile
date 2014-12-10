@@ -16,4 +16,4 @@ run:
 	./compiler testes/sample2.cm
 
 clean:
-	rm *.o compiler lex.yy.c gram.tab.c gram.tab.h gram.dot gram.pdf gram.output
+	rm *.o compiler lex.yy.c gram.tab.c gram.tab.h gram.dot gram.pdf gram.output SimTab SimTab.txt

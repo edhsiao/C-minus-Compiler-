@@ -12,9 +12,13 @@ int abc (int qwe,float lol)
 	float ee[123];
 	float qre;
 
+	/* int aa; */
+	
 	cc = -2;
 	qre = 1.23;
-
+	
+	/* a = 2; */
+	
 	if( aa == bb )
 	{
 		while (aa <= cc)
@@ -37,5 +41,6 @@ int abc (int qwe,float lol)
 
 int main(void)
 {
+	int aa;
 	return 1;
 }

@@ -105,6 +105,7 @@ TreeNode* newStmtNode(StmtKind kind) {
 		t->nodekind = Stmt;
 		t->kind.stmt = kind;
 		t->lineno = lineno;
+		t->scopeVar = 0;
 	}
 	return t;
 }
@@ -123,6 +124,7 @@ TreeNode* newExpNode(ExpKind kind) {
 		t->nodekind = Exp;
 		t->kind.exp = kind;
 		t->lineno = lineno;
+		t->scopeVar = 0;
 	}
 	return t;
 }
@@ -141,6 +143,7 @@ TreeNode* newDeclNode(DeclKind kind) {
 		t->nodekind = Decl;
 		t->kind.decl = kind;
 		t->lineno = lineno;
+		t->scopeVar = 0;
 	}
 	return t;
 }
@@ -158,6 +161,7 @@ TreeNode* newListNode(ListKind kind) {
 		t->nodekind = ListK;
 		t->kind.list = kind;
 		t->lineno = lineno;
+		t->scopeVar = 0;
 	}
 	return t;
 }
@@ -175,6 +179,7 @@ TreeNode* newErrNode() {
 		t->nodekind = Error;
 		t->lineno = lineno;
 		t->col = col;
+		t->scopeVar = 0;
 	}
 	return t;
 }

@@ -1454,7 +1454,7 @@ yyreduce:
   case 11:
 #line 133 "gram.y" /* yacc.c:1646  */
     {
-			  (yyval).str = copyString("Inteiro");
+			  (yyval).str = copyString("Integer");
 			}
 #line 1460 "gram.tab.c" /* yacc.c:1646  */
     break;

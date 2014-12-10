@@ -131,7 +131,7 @@ var_declaration	: type_specifier ID PV
 type_specifier	: 
 		INT
 			{
-			  $$.str = copyString("Inteiro");
+			  $$.str = copyString("Integer");
 			}
 		| VOID
 			{

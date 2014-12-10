@@ -26,8 +26,8 @@ int main( int argc, char * argv[] )
 	char prog[120];
 	if (argc < 2)
 	{;
-		fprintf(stderr,"Uso: %s <nomeArquivo>\n",argv[0]);
-		exit(1);
+	fprintf(stderr,"Uso: %s <nomeArquivo>\n",argv[0]);
+	exit(1);
 	}
 	if (argc == 3)
 	{
@@ -61,11 +61,19 @@ int main( int argc, char * argv[] )
 		printTree(syntaxTree);
 	}
 
-	sym_tab = createSymTable(syntaxTree);
-	printList(sym_tab);
+	//	sym_tab = createSymTable(syntaxTree);
+	//	printList(sym_tab);
 
-	list_kill(l);
-	fclose(source);
+	buildSymtab(syntaxTree);
+	typeCheck(syntaxTree);
+
+	if( getHasMain() == 0 )
+		printf("\nERRO SEMANTICO: funcao main nao declarada\n");
+
+	//list_kill(l);
+	//fclose(source);
+
+	printf("\n\nFIM");
 
 	return 0;
 }

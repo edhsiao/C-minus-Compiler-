@@ -57,6 +57,7 @@ typedef struct treeNode
 	ValType val; /* Inteiro ou Real */
 	char* name;
 	char* type;
+	int scopeVar; /* Para verificacao do escopo */
 	/*ExpType type; */ /* Para a checagem de tipo */
 } TreeNode;
 

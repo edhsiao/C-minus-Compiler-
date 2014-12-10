@@ -1,0 +1,18 @@
+
+Tabela de Simbolos:
+
+Nome Variavel  Tipo Variavel  Escopo Tipo Dado  TipoRetorno  Local(hash)  Linha(s)
+-------------  -------------  ------ ---------  -----------  -----------  --------
+dd             int            1      Integer                 7            10    33    33    36    37 
+main           func           2                 Integer      11           42 
+ee             array          1      Array                   9            12    30    31    32    33    34    35    36    37 
+qre            float          1      Float                   10           13    18 
+k              int            0      Integer                 2             3 
+x              int            0      Integer                 0             1 
+y              int            0      Integer                 1             2 
+abc            func           1                 Integer      3            37 
+aa             int            2      Integer                 12           44 
+aa             int            1      Integer                 4             7    22    24    25    30    30    34    39 
+zzz            array          1      Array                   8            11 
+bb             int            1      Integer                 5             8    22    31    31    34    35 
+cc             int            1      Integer                 6             9    17    24    32    32    35    36    37 
